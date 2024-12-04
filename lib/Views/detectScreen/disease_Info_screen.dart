@@ -13,13 +13,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class DiseaseInfoScreen extends StatelessWidget {
-  final Disease disease;
-  final String? pickedImagePath; // Optional picked image path
-
-  const DiseaseInfoScreen({
+  final DiseaseModel disease;
+  final String pickedImagePath;
+   DiseaseInfoScreen({
     Key? key,
     required this.disease,
-    this.pickedImagePath,
+   required this.pickedImagePath,
   }) : super(key: key);
 
   @override
@@ -50,7 +49,7 @@ class DiseaseInfoScreen extends StatelessWidget {
                       child: ClipOval(
                         child: pickedImagePath != null
                           ? Image.file(
-                              File(pickedImagePath!),
+                              File(pickedImagePath),
                               fit: BoxFit.cover,
                             )
                           : Icon(Icons.error)
@@ -59,16 +58,21 @@ class DiseaseInfoScreen extends StatelessWidget {
                   )
                 ),
                 SizedBox(height: 20.h),
-          
-                // Disease Information
-                buildInfoRow('Disease name : ', disease.diseaseName),
-                buildInfoRow('Symptoms : ', disease.symptoms),
-                buildInfoRow('Caused by : ', disease.causedBy),
-                buildInfoRow('Cure : ', disease.cure),
-                buildInfoRow('Prevent Now : ', disease.prevent),
-          
-                SizedBox(height: 60.h),
-                // Edit and Done buttons
+            if (disease.predictedClass.isNotEmpty) ...[
+                buildInfoRow('Predicted Class:', disease.predictedClass),
+                buildInfoRow('Symptoms:', disease.treatment),
+                buildInfoRow('Confidence:', disease.confidence),
+                buildInfoRow('Cure:', disease.precautions),
+              ] else
+                 Center(
+                  child: Text(
+                    'No Data Found',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

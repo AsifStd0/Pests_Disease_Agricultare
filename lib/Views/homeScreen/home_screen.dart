@@ -84,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               provider.pickedImage(context,'crops');
                                             }
                                             else if(index == 1){
-                                              provider.pickedImage(context,'disease');
+                                                          context.read<HomeProvider>().pickedImage(context, 'disease');
+                                              // provider.pickedImage(context,'disease');
                                             }
                                             else{
                                             //   Disease

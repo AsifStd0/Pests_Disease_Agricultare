@@ -1,5 +1,4 @@
 import 'package:agricultare_weather_pests/Views/ContactUs/contact_us.dart';
-import 'package:agricultare_weather_pests/Views/detectScreen/disease_Info_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
