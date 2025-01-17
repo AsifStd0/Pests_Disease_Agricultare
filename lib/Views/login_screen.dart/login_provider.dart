@@ -26,8 +26,7 @@ Future<void> login(BuildContext context) async {
 
   final Map<String, String> loginData = {
     'email': email,
-    'password': password,
-  };
+    'password': password};
 
   try {
     // API Call
@@ -60,11 +59,41 @@ Future<void> login(BuildContext context) async {
 
       // Optionally save the entire response for later use
       prefs.setString('user_data', json.encode(responseData));
+      // ! *******
+// Check if a language preference is already saved
+String? currentLanguage = prefs.getString('language');
 
-      // Optionally save the language preference
-      String languageCode = 'en'; // Or get the current language from the app's state
-      prefs.setString('language', languageCode); // Save language preference
+// If no preference exists, set the default language to English
+if (currentLanguage == null) {
+  String languageCode = 'en'; // Default to English
+  prefs.setString('language', languageCode);
+  log('Language preference not found. Setting default to: $languageCode');
+} else {
+  log('Language preference already exists: $currentLanguage');
+}
 
+// Apply the language preference
+if (currentLanguage == 'ur') {
+  log('Setting language to Urdu');
+  // Set app locale to Urdu
+  Get.updateLocale(Locale('ur'));
+} else {
+  log('Setting language to English');
+  // Set app locale to English (default)
+  Get.updateLocale(Locale('en'));
+}
+
+      // // Check if a language preference is already saved
+      // String? currentLanguage = prefs.getString('language');
+      // if (currentLanguage == null) {
+      //   // Set default language preference if not already set
+      //   String languageCode = 'en'; // Or dynamically detect language
+      //   prefs.setString('language', languageCode);
+      //   log('Language preference set to: $languageCode');
+      // } else {
+      //   log('Language preference already exists: $currentLanguage');
+      // }
+// ! **********
       // Navigate to the HomeScreen
       Get.off(() => HomeScreen());
 

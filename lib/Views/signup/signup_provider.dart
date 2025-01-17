@@ -52,11 +52,38 @@ class SignupProvider extends BaseViewModel {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('user_id', userId);  // Save user ID
         prefs.setString('user_data', json.encode(userDataModel.toJson()));  // Save full user data
+  // Check if a language preference is already saved
+String? currentLanguage = prefs.getString('language');
 
+// If no preference exists, set the default language to English
+if (currentLanguage == null) {
+  String languageCode = 'en'; // Default to English
+  prefs.setString('language', languageCode);
+  log('Language preference not found. Setting default to: $languageCode');
+} else {
+  log('Language preference already exists: $currentLanguage');
+}
 
-  // Optionally save language preference if needed
-      String languageCode = 'en'; // Assuming you get this from the language toggle
-      prefs.setString('language', languageCode);
+// Apply the language preference
+if (currentLanguage == 'ur') {
+  log('Setting language to Urdu');
+  // Set app locale to Urdu
+  Get.updateLocale(Locale('ur'));
+} else {
+  log('Setting language to English');
+  // Set app locale to English (default)
+  Get.updateLocale(Locale('en'));
+}
+  // // Check if a language preference is already saved
+      // String? currentLanguage = prefs.getString('language');
+      // if (currentLanguage == null) {
+      //   // Set default language preference if not already set
+      //   String languageCode = 'en'; // Or dynamically detect language
+      //   prefs.setString('language', languageCode);
+      //   log('Language preference set to: $languageCode');
+      // } else {
+      //   log('Language preference already exists: $currentLanguage');
+      // }
         // Navigate to the next screen (HomeScreen)
         Get.to(() => HomeScreen());
 

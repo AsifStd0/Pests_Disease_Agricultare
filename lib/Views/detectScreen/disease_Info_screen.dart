@@ -7,6 +7,7 @@ import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 
 
@@ -20,6 +21,7 @@ class DiseaseInfoScreen extends StatelessWidget {
     required this.disease,
    required this.pickedImagePath,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +61,14 @@ class DiseaseInfoScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
             if (disease.predictedClass.isNotEmpty) ...[
-                buildInfoRow('Predicted Disease : ', disease.predictedClass),
-                buildInfoRow('Treatment : ', disease.treatment),
-                buildInfoRow('Confidence : ', disease.confidence),
-                buildInfoRow('Precaution : ', disease.precautions),
+                buildInfoRow('predictedDisease : '.tr, disease.predictedClass),
+                buildInfoRow('treatment : '.tr, disease.treatment),
+                buildInfoRow('confidence : '.tr, disease.confidence),
+                buildInfoRow('precaution : '.tr, disease.precautions),
               ] else
                  Center(
                   child: Text(
-                    'No Data Found',
+                    "noData".tr,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -83,7 +85,7 @@ class DiseaseInfoScreen extends StatelessWidget {
           child: KlButton(
              onPressed: () => Navigator.pop(context),
            style: KlButtonStyle.camera,
-           label: 'Done',
+           label: 'done'.tr,
            buttonColor: mainColor,
           ),
         )

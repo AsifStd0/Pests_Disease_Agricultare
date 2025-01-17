@@ -51,7 +51,7 @@ class _HistoryMainState extends State<HistoryMain> {
                                             fontsize: 18.sp,
                                             fontweight: FontWeight.w700,
                                             color: blackColor),
-                                        Text("dummy".tr,
+                                        Text("sunflower".tr,
                                             style: TextStyle(
                                                 fontSize: 14.sp,
                                                 color: Colors.grey[800]),

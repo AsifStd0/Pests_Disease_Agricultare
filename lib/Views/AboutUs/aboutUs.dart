@@ -37,11 +37,14 @@ class _AboutusState extends State<Aboutus> {
               text: "aboutUs".tr,
               fontsize: 28.sp,
             ),
+            SizedBox(height: 20.h,),
              Align(
               alignment: Alignment.center,
                child: CustomText(
                 text: "splash_head".tr,
+                maxlines: 2,
                 // 'WEATHER  & PEST DISEASE \nCONTROL APP',
+                softwrap: false,
                 fontsize: 20.sp,
                        ),
              ),
@@ -50,7 +53,7 @@ class _AboutusState extends State<Aboutus> {
               alignment: Alignment.center,
                child: Text(
                 overflow: TextOverflow.visible,
-                 "abousUsDummy".tr,
+                 "aboutUsData".tr,
                      style: TextStyle(
                 fontSize: 16.sp,
                     ),

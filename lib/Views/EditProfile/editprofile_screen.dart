@@ -34,7 +34,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-              title: Text('Edit Profile'),
+              title: Text('editProfile'.tr),
               centerTitle: true),
           body: Consumer<EditprofileProvider>(
               builder: (context, model, child) => Scaffold(
@@ -70,8 +70,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                                         CustomText(text: "firstname".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.firstNameController,
-                                            style:
-                                                KlTextInputFieldStyle.firstName,
+                                            style:KlTextInputFieldStyle.firstName,
                                             validator: KlValidators.firstNameValidator),
                                         SizedBox(height: 10.h),
                                          

@@ -33,7 +33,7 @@ class _EducationDetailState extends State<EducationDetail> {
                     child: CustomText(text: "aloeVera".tr,fontsize: 18.sp,fontweight: FontWeight.w700),
                   ),
 
-                  Text("dummy1".tr,style: TextStyle(fontSize: 14.sp,),)
+                  Text("educationDummy".tr,style: TextStyle(fontSize: 14.sp,),)
             ],),
           ),
     );

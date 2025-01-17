@@ -1,6 +1,7 @@
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Views/AboutUs/aboutUs.dart';
 import 'package:agricultare_weather_pests/Views/ContactUs/contact_us.dart';
+import 'package:agricultare_weather_pests/Views/EditProfile/editprofile_screen.dart';
 import 'package:agricultare_weather_pests/Views/dialogs/custom_dialog.dart';
 import 'package:agricultare_weather_pests/Views/education/education_screen.dart';
 import 'package:agricultare_weather_pests/Views/history/history_main.dart';
@@ -8,6 +9,7 @@ import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
+import 'package:agricultare_weather_pests/utils/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -133,14 +135,48 @@ class MenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: mainColor,
+        color: whiteColor,
         child: Consumer(
                 builder: (context, LoginProvider provider, child) {
                   return ModalProgressHUD(
                     inAsyncCall: provider.state == ViewState.busy,
                     progressIndicator: CircularProgressIndicator(color: mainColor),
                     child: Column(children: [
-        
+                      Padding(
+                        padding: EdgeInsets.only(top: 30.h,right: 30.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+                          GestureDetector(
+                            onTap: () {
+                                  Get.off(() => HomeScreen());
+                            },
+                            child: Icon(
+                              Icons.highlight_remove_outlined,
+                            ),
+                          )
+                        ],),
+                      ),
+     
+  Padding(
+
+    padding:  EdgeInsets.only(top: 10.h),
+    child: ClipOval(
+    child: Container(
+      width: 130,
+      height: 130, // Ensures the container is a square
+      decoration: BoxDecoration(
+        color: Colors.transparent, // Optional: Background color if needed
+      ),
+      child: Image.asset(
+        MepaImage.splashLogo,
+        fit: BoxFit.cover, // Ensures the image covers the container uniformly
+      ),
+    ),
+    ),
+  ),
+
                 // Container(
                 //   height: 100,
                 //   width: double.infinity,
@@ -149,7 +185,6 @@ class MenuWidget extends StatelessWidget {
                 //     alignment: Alignment.center,
                 //     child: CustomText(text:"pestDetection".tr,fontsize: 22.sp,color: whiteColor,fontweight: FontWeight.bold,)),
                 // ),
-                SizedBox(height: 60.h),
                  Expanded(
                   child: ListView.builder(
                     itemCount: menuData.length,
@@ -176,6 +211,9 @@ class MenuWidget extends StatelessWidget {
           
           
                               Get.to(()=>Aboutus());
+                            }
+                            else if(index == 2){
+                              Get.to(()=> EditprofileScreen());
                             }
                             else  if (index == 3) {
                                                       print('HistoryScreen 111');

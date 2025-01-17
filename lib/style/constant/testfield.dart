@@ -1,22 +1,8 @@
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-enum KlTextInputFieldStyle {
-  email,
-  password,
-  phoneNumber,
-  firstName,
-  userName,
-  dropDown,
-  select,
-  address,
-  city,
-  zipCode,
-  cvv,
-  search
-}
+enum KlTextInputFieldStyle {email,password,phoneNumber,firstName,userName,dropDown,select,address,city,zipCode,cvv,search}
 
 class KlTextInputField extends StatefulWidget {
   final KlTextInputFieldStyle style;
@@ -46,33 +32,7 @@ class KlTextInputField extends StatefulWidget {
   final EdgeInsets? padding;
 
   KlTextInputField({
-    Key? key,
-    this.style = KlTextInputFieldStyle.email,
-    this.hintText,
-    this.padding,
-    this.keyBoardType,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.validator,
-    this.obscureText = false,
-    this.suffixOntap,
-    this.controller,
-    this.readOnly = false,
-    this.showCursor = true,
-    this.initialValue,
-    this.ontap,
-    this.hintTextColor,
-    this.hintTextStyle,
-    this.textStyle,
-    this.fillColor,
-    this.focusedBorderColor,
-    this.enableBorderColor,
-    this.onChanged,
-    this.textInputAction,
-    this.focusNode,
-    this.onFieldSubmitted,
-    this.contentPadding,
-  }) : super(key: key);
+    Key? key,this.style = KlTextInputFieldStyle.email,this.hintText,this.padding,this.keyBoardType,this.suffixIcon,this.prefixIcon,this.validator,this.obscureText = false,this.suffixOntap,this.controller,this.readOnly = false,this.showCursor = true,this.initialValue,this.ontap,this.hintTextColor,this.hintTextStyle,this.textStyle,this.fillColor,this.focusedBorderColor,this.enableBorderColor,this.onChanged,this.textInputAction,this.focusNode,this.onFieldSubmitted,this.contentPadding,}) : super(key: key);
 
   @override
   _KlTextInputFieldState createState() => _KlTextInputFieldState();
@@ -83,23 +43,7 @@ class _KlTextInputFieldState extends State<KlTextInputField> {
 
   TextInputType get keyboardType {
     switch (widget.style) {
-      case KlTextInputFieldStyle.email:
-        return TextInputType.emailAddress;
-      case KlTextInputFieldStyle.password:
-        return TextInputType.visiblePassword;
-      case KlTextInputFieldStyle.phoneNumber:
-        return TextInputType.phone;
-      case KlTextInputFieldStyle.firstName:
-      case KlTextInputFieldStyle.userName:
-      case KlTextInputFieldStyle.dropDown:
-      case KlTextInputFieldStyle.select:
-      case KlTextInputFieldStyle.address:
-      case KlTextInputFieldStyle.city:
-      case KlTextInputFieldStyle.zipCode:
-      case KlTextInputFieldStyle.cvv:
-      case KlTextInputFieldStyle.search:
-      default:
-        return widget.keyBoardType ?? TextInputType.text;
+      case KlTextInputFieldStyle.email:return TextInputType.emailAddress;case KlTextInputFieldStyle.password:return TextInputType.visiblePassword;case KlTextInputFieldStyle.phoneNumber:return TextInputType.phone;case KlTextInputFieldStyle.firstName:case KlTextInputFieldStyle.userName:case KlTextInputFieldStyle.dropDown:case KlTextInputFieldStyle.select:case KlTextInputFieldStyle.address:case KlTextInputFieldStyle.city:case KlTextInputFieldStyle.zipCode:case KlTextInputFieldStyle.cvv:case KlTextInputFieldStyle.search:default:return widget.keyBoardType ?? TextInputType.text;
     }
   }
 
@@ -173,22 +117,7 @@ class _KlTextInputFieldState extends State<KlTextInputField> {
     return Padding(
       padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 40.w),
       child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: keyboardType,
-        obscureText: isObscure,
-        readOnly: widget.readOnly,
-        showCursor: widget.showCursor,
-        initialValue: widget.initialValue,
-        onTap: widget.ontap,
-        onChanged: widget.onChanged,
-        validator: widget.validator,
-        controller: widget.controller,
-        textInputAction: widget.textInputAction ?? TextInputAction.next,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        focusNode: widget.focusNode,
-        cursorColor: Color(0xff707070),
-        decoration: inputDecoration,
-      ),
+        autovalidateMode: AutovalidateMode.onUserInteraction,keyboardType: keyboardType,obscureText: isObscure,readOnly: widget.readOnly,showCursor: widget.showCursor,initialValue: widget.initialValue,onTap: widget.ontap,onChanged: widget.onChanged,validator: widget.validator,controller: widget.controller,textInputAction: widget.textInputAction ?? TextInputAction.next,onFieldSubmitted: widget.onFieldSubmitted,focusNode: widget.focusNode,cursorColor: Color(0xff707070),decoration: inputDecoration,),
     );
   }
 }

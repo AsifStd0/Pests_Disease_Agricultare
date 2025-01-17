@@ -41,32 +41,31 @@ class _EducationScreenState extends State<EducationScreen> {
           },),
 ),
       body:
-      Expanded(
-        child: ListView.builder(
-          padding: EdgeInsets.only(left: 5.w,right: 30.w,top: 20.h),
-          itemCount: 5,
-          itemBuilder: (context,index){
-          return InkWell(
-            onTap: (){},
-            child: Padding(
-              padding:  EdgeInsets.only(top: 15.h),
-              child: Row(children: [
-                Image.asset(MepaImage.crop_2,width: 100.w,height: 80.h,),
-                Expanded(child: Text(cropsName[index],style: TextStyle(fontSize:18.sp))),
-                      CircularBackButton
-                      (
-                        iconSize: 29.sp,
-                        onPressed: (){
-                          
-              Get.to(()=>EducationDetail());
-                        },
-                        icon: Icons.arrow_forward,),
-                      
-              ],),
-            ),
-          );
-        }),
-      )
+      ListView.builder(
+        
+        padding: EdgeInsets.only(left: 5.w,right: 30.w,top: 20.h),
+        itemCount: 5,
+        itemBuilder: (context,index){
+        return InkWell(
+          onTap: (){},
+          child: Padding(
+            padding:  EdgeInsets.only(top: 15.h),
+            child: Row(children: [
+              Image.asset(MepaImage.crop_2,width: 100.w,height: 80.h,),
+              Expanded(child: Text(cropsName[index],style: TextStyle(fontSize:18.sp))),
+                    CircularBackButton
+                    (
+                      iconSize: 29.sp,
+                      onPressed: (){
+                        
+            Get.to(()=>EducationDetail());
+                      },
+                      icon: Icons.arrow_forward,),
+                    
+            ],),
+          ),
+        );
+      })
       
     );
   }

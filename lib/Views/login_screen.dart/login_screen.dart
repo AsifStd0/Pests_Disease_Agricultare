@@ -66,11 +66,10 @@ class _LoginscreenState extends State<Loginscreen> {
                                 onPressed: () {
                                   Get.to(() => HomeScreen());
                                 },
-                                textStyle: TextStyle(color: whiteColor,fontSize: 11.sp),
-                              ),
-                            ),
+                                textStyle: TextStyle(color: whiteColor,fontSize: 11.sp)
+                              )
+                            )
                           ),
-                          // ]),
                           lets_started(),
                           SizedBox(height: 40.h),
                           KlTextInputField(
@@ -83,8 +82,7 @@ class _LoginscreenState extends State<Loginscreen> {
                             controller: provider.passwordController,
                             validator: KlValidators.logInPasswordValidator,
                             style: KlTextInputFieldStyle.password,
-                            prefixIcon: Icon(Icons.lock, color: greyColor),
-                          ),
+                            prefixIcon: Icon(Icons.lock, color: greyColor)),
                           SizedBox(height: 40.h),
                           KlButton(
                               onPressed: () {

@@ -63,6 +63,9 @@ appBar: AppBar(
       leading:  GestureDetector(
         onTap: (){    scaffoldKey.currentState?.openDrawer();},
         child: Icon(Icons.menu, color: greyColor)),
+        centerTitle: true,
+        title:  Text("pests".tr,style: TextStyle(color: blackColor,fontSize: 24.sp,
+                          fontWeight: FontWeight.w700,fontFamily: 'Roboto')),
       actions: [
         Container(child: 
                Obx(() {
@@ -76,8 +79,21 @@ appBar: AppBar(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Switch(
+                 Switch(
                   value: isUrdu.value,
+                  trackColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+    if (states.contains(MaterialState.disabled)) {
+      return mainColor;
+    }
+    return mainColor;
+  }),
+
+                  thumbColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+    if (states.contains(MaterialState.disabled)) {
+      return Colors.orange;
+    }
+    return Colors.orange;
+  }),
                    onChanged: (value) async {
                       isUrdu.value = value;
                       // Save language preference
@@ -93,15 +109,6 @@ appBar: AppBar(
                         Get.updateLocale(const Locale('en', 'US'));
                       }
                     },
-                  // onChanged: (value) {
-                  //   isUrdu.value = value;
-                  //   // Update locale based on toggle value
-                  //   if (isUrdu.value) {
-                  //     Get.updateLocale(const Locale('ur', 'PK'));
-                  //   } else {
-                  //     Get.updateLocale(const Locale('en', 'US'));
-                  //   }
-                  // },
                   activeColor: Colors.green,
                   inactiveThumbColor: Colors.grey,
                 ),
@@ -114,55 +121,7 @@ appBar: AppBar(
         body: Consumer<HomeProvider>(builder: (context, provider, child) {
       return ModalProgressHUD(
           inAsyncCall: provider.state == ViewState.busy,
-          // child: 
-          
-        //   SliderDrawer(
-        //       key: _drawerKey,
-        //       appBar: SliderAppBar(
-        //           drawerIcon: IconButton(
-        //               icon: Icon(Icons.menu, color: greyColor),
-        //               onPressed: () {
-        //                 _drawerKey.currentState?.toggle();
-        //               }),
-        //           appBarColor: whiteColor,
-        //           title: Text("pests".tr,
-        //               style: TextStyle(
-        //                   color: blackColor,
-        //                   fontSize: 24.sp,
-        //                   fontWeight: FontWeight.w700,
-        //                   fontFamily: 'Roboto')),
-        //                   trailing:    
-        //                       Obx(() {
-        //     return Row(
-        //       children: [
-        //         Text(
-        //           "language_toggle".tr, // Dynamic language text
-        //           style: TextStyle(
-        //             color: blackColor,
-        //             fontSize: 16.sp,
-        //             fontWeight: FontWeight.w500,
-        //           ),
-        //         ),
-        //         Switch(
-        //           value: isUrdu.value,
-        //           onChanged: (value) {
-        //             isUrdu.value = value;
-        //             // Update locale based on toggle value
-        //             if (isUrdu.value) {
-        //               Get.updateLocale(const Locale('ur', 'PK'));
-        //             } else {
-        //               Get.updateLocale(const Locale('en', 'US'));
-        //             }
-        //           },
-        //           activeColor: Colors.green,
-        //           inactiveThumbColor: Colors.grey,
-        //         ),
-        //     ]);
-    
-        // })      
-        //                   ),
-        //       slider: MenuWidget(),
-              child:
+        child:
                Container(
                   color: whiteColor,
                   child: Column(
@@ -180,7 +139,7 @@ appBar: AppBar(
                       child: Obx(() {
                         // Reactive data used here
        final listText = isUrdu.value
-      ? ["snap_tips_urdu".tr, "identifyDiseaseHome_urdu".tr]  // Fetch different Urdu translations
+      ? ["identifyDiseaseHome_urdu".tr, "snap_tips_urdu".tr]  // Fetch different Urdu translations
       : ["identifyDiseaseHome".tr, "snapTips".tr];  // Fetch different English translations
     
                         return ListView.builder(
@@ -210,22 +169,22 @@ appBar: AppBar(
                                         height: 80.h,
                                         width: 160.w,
                                       ),
-                                      CustomText(text: listText[index]),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                      CustomText(text: listText[index])
+                                    ]
+                                  )
+                                )
+                              )
                             );
-                          },
+                          }
                         );
-                      }),
-                    ),
-                  ],
-                ),
-              ),
-            // ),
+                      })
+                    )
+                  ]
+                )
+              )
+            // )
           );
-        }),
+        })
       );
   }
 }
