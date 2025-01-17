@@ -1,6 +1,8 @@
 import 'package:agricultare_weather_pests/style/colors.dart';
+import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 // ! UUUUUUUUUUUUUUUU
 
@@ -78,7 +80,7 @@ static TextStyle fieldName = TextStyle(
   
 }
 
-CustomText lets_started() => CustomText(text: "Let's get started!",fontweight: FontWeight.w700,fontsize: 17.sp,);
+CustomText lets_started() => CustomText(text: "letsStart".tr,fontweight: FontWeight.w700,fontsize: 17.sp,);
 
 // ! **************
 // ignore: must_be_immutable

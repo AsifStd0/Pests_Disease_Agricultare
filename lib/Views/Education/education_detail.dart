@@ -30,10 +30,10 @@ class _EducationDetailState extends State<EducationDetail> {
                   Image.asset(MepaImage.crop_2,height: 200.h,width: double.infinity,fit: BoxFit.fill,),
                   Padding(
                     padding:  EdgeInsets.only(top: 25.h,bottom: 15.h),
-                    child: CustomText(text: 'Aloe Vera',fontsize: 18.sp,fontweight: FontWeight.w700),
+                    child: CustomText(text: "aloeVera".tr,fontsize: 18.sp,fontweight: FontWeight.w700),
                   ),
 
-                  Text(MepaText.dummy1,style: TextStyle(fontSize: 14.sp,),)
+                  Text("dummy1".tr,style: TextStyle(fontSize: 14.sp,),)
             ],),
           ),
     );

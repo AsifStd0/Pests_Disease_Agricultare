@@ -23,7 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         appBar: AppBar(
             automaticallyImplyLeading: false, 
             centerTitle: true,
-          title: Text(MepaText.pests),
+          title: Text("pests".tr),
         ),
         body: Container(
             color: whiteColor,
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 alignment: Alignment.center,
                 child: CustomText(
                   textAlign: TextAlign.center,
-                  text: MepaText.welcome,
+                  text: "welcome".tr,
                   fontsize: 58.sp,
                   color: Color(0xffA0B622)
                 )
@@ -47,13 +47,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Padding(
                 padding:  EdgeInsets.only(bottom: 30.h),
                 child: CustomText(
-                  text: MepaText.pestsDisease,
+                  text: "pestsDisease".tr,
                   color: mainColor,
                   fontsize: 32.sp
                 )
               ),
               KlButton(
-                label: MepaText.continueTxt,
+                label: "continueTxt".tr,
                 // textstyle: TextStyle(fontSize: 20.sp),
                 // bordercol: mainColor,
                 borderRadius: BorderRadius.circular(10.r),

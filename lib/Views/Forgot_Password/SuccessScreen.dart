@@ -28,14 +28,14 @@ Navigator.of(context).push(
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            CustomText(text: 'Success!',customstyle:TextStyle(
+            CustomText(text: 'Success!'.tr,customstyle:TextStyle(
                                               fontSize: 23.sp,
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
                 fontFamily: 'Roboto',)),
                 Padding(
                   padding: EdgeInsets.only(top: 20.h,bottom: 60.h),
-                  child: CustomText(text: MepaText.congratulation,maxlines: 2,),
+                  child: CustomText(text: "congratulation".tr,maxlines: 2,),
                 ),
                 
                    Align(
@@ -45,7 +45,7 @@ Navigator.of(context).push(
                         Get.to(()=> SuccessfulDone());
                       },
                                 style: KlButtonStyle.fullButton,
-                                label: MepaText.confirm
+                                label: "confirm".tr
 
                      ),),
           ],),

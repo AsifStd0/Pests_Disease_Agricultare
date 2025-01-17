@@ -1,41 +1,197 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:agricultare_weather_pests/Model/base_view_model.dart';
 import 'package:agricultare_weather_pests/Model/enum.dart';
-import 'package:agricultare_weather_pests/Views/signup/signup.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
+import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 class LoginProvider extends BaseViewModel {
-    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-    Future<bool> checkUserExists(String uid) async {
-    try {
-      final DocumentSnapshot doc =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      final data = doc.data() as Map<String, dynamic>;
-      if (data.isNotEmpty) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      print('Error checking user existence: $e');
-      return false;
-    }
-  }
-  TextEditingController forgotemailController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+Future<void> login(BuildContext context) async {
+  // Set the state to busy to indicate a loading state
+  setState(ViewState.busy);
 
-  void login(BuildContext context) {
-    setState(ViewState.busy); 
-      String email = emailController.text;
-      String password = passwordController.text;
-      print('Email: $email, Password: $password');
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Login Successful')));
-          Get.to(()=>Signup());
+  final String email = emailController.text.trim();
+  final String password = passwordController.text.trim();
 
-    setState(ViewState.idle); 
+  // Log credentials (only for debugging; remove in production)
+  log('Email: $email, Password: $password');
+
+  final Map<String, String> loginData = {
+    'email': email,
+    'password': password,
+  };
+
+  try {
+    // API Call
+    log('Calling');
+    final response = await http.post(
+      Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/login'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(loginData),
+    );
+
+    if (response.statusCode == 200) {
+      log('status');
+      final responseData = json.decode(response.body);
+
+      // Log response for debugging
+      log('Response Data: $responseData');
+
+      // Access the first item in the 'data' array
+      var user = responseData['data'][0];
+
+      // Save user data to SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      // Save individual fields for quick access
+      prefs.setString('user_id', user['_id'] ?? '');
+      prefs.setString('user_email', user['email'] ?? '');
+      prefs.setString('user_first_name', user['first_name'] ?? '');
+      prefs.setString('user_last_name', user['last_name'] ?? '');
+      prefs.setString('user_role', user['role'] ?? '');
+
+      // Optionally save the entire response for later use
+      prefs.setString('user_data', json.encode(responseData));
+
+      // Optionally save the language preference
+      String languageCode = 'en'; // Or get the current language from the app's state
+      prefs.setString('language', languageCode); // Save language preference
+
+      // Navigate to the HomeScreen
+      Get.off(() => HomeScreen());
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text('loginsuccessful'.tr)),
+      );
+    } else {
+      // Handle non-200 responses
+      log('Error Response: ${response.body}');
+      final errorData = json.decode(response.body);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Failed: ${errorData['message'] ?? 'Unknown error'}')),
+      );
+    }
+  } catch (e) {
+    // Handle exceptions
+    log('Exception: $e');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('An error occurred: $e')),
+    );
+  } finally {
+    // Reset the state to idle
+    setState(ViewState.idle);
+    notifyListeners();
   }
+}
+
+  // Future<void> login(BuildContext context) async {
+  //   setState(ViewState.busy);
+
+  //   final String email = emailController.text;
+  //   final String password = passwordController.text;
+
+  //   // Log the credentials
+  //   log('Email: $email, Password: $password');
+
+  //   final Map<String, String> loginData = {
+  //     'email': email,
+  //     'password': password,
+  //   };
+
+  //   try {
+  //     // API Call
+  //     final response = await http.post(
+  //       Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/login'),
+  //       headers: {"Content-Type": "application/json"},
+  //       body: json.encode(loginData),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final responseData = json.decode(response.body);
+
+  //       // Save user data locally (SharedPreferences)
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       prefs.setString('user_data', json.encode(responseData));
+
+  //       // Navigate to the next screen
+  //       Get.to(() => HomeScreen());
+
+  //       // Show success message
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Login Successful')),
+  //       );
+  //     } else {
+  //       // Log the error response
+  //       log('Error Response: ${response.body}');
+        
+  //       // Show error message
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('Login Failed: ${response.body}')),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     // Log and handle exceptions
+  //     log('Exception: $e');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('An error occurred: $e')),
+  //     );
+  //   } finally {
+  //     setState(ViewState.idle);
+  //     notifyListeners();
+  //   }
+  // }
+
+
+  logoutApi(context) async {
+    setState(ViewState.busy);
+       // Perform the API call to logout
+              try {
+                final response = await http.post(
+                  Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/logout'),
+                  headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with actual token
+                  },
+                );
+
+                if (response.statusCode == 200) {
+                  // Logout successful
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.clear(); // Clear all user data from local storage
+
+                  // Redirect to Login screen
+                  Get.offAll(() => Loginscreen());
+                  log('User logged out successfully');
+                } else {
+                  // Handle error response
+                  log('Logout failed: ${response.body}');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to logout. Please try again.'),
+                    ),
+                  );
+                }
+              } catch (e) {
+                // Handle network or unexpected errors
+                log('Error during logout: $e');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('An error occurred. Please try again later.'),
+                  ),
+                );
+              }
+  
+    setState(ViewState.idle);
+  }
+
 }

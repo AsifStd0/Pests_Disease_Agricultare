@@ -25,14 +25,14 @@ class EditprofileProvider extends BaseViewModel {
     print("$userData");
     
     UserDataModel user = UserDataModel.fromJson(json.decode(userData.toString()));
-    print('${user.image.runtimeType} ${user.image}');
+    // print('${user.image.runtimeType} ${user.image}');
     // Populate the text controllers with user data
     emailController.text = user.email.toString();
     passwordController.text = user.password.toString(); // Assuming this is a String
     firstNameController.text = user.firstName.toString();
     lastNameController.text = user.lastName.toString();
-    locationController.text = user.location.toString();
-    imgName = user.image;
+    // locationController.text = user.location.toString();
+    // imgName = user.image;
       notifyListeners(); // Notify listeners to rebuild UI if necessary
   }
 

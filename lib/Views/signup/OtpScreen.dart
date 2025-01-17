@@ -1,10 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 
-import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Otpscreen extends StatefulWidget {
@@ -75,19 +72,19 @@ String? currentText= '';
             // appContext: null,
           ),
             ElevatedButton(onPressed: () async {
-              try{
-                  // Create a PhoneAuthCredential with the code
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verificationId.toString(),
-     smsCode: snmController.text);
+    //           try{
+    //               // Create a PhoneAuthCredential with the code
+    // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verificationId.toString(),
+    //  smsCode: snmController.text);
 
-    // Sign the user in (or link) with the credential
-    await FirebaseAuth.instance.signInWithCredential(credential);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Successful Login')));
-    Get.to(()=>HomeScreen());
-              }
-             on FirebaseException  catch(e){
-                log(e.message.toString());
-              }
+    // // Sign the user in (or link) with the credential
+    // await FirebaseAuth.instance.signInWithCredential(credential);
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Successful Login')));
+    // Get.to(()=>HomeScreen());
+    //           }
+    //          on FirebaseException  catch(e){
+    //             log(e.message.toString());
+    //           }
             }, child: Text('Submit'))
           
           ],),

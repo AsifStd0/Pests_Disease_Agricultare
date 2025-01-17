@@ -67,7 +67,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                                                           
                                                            Icon(Icons.camera_alt)))
                                             ]),
-                                        CustomText(text: MepaText.firstname,customstyle:KlTexts.fieldName),
+                                        CustomText(text: "firstname".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.firstNameController,
                                             style:
@@ -76,7 +76,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                                         SizedBox(height: 10.h),
                                          
                                          
-                                             CustomText(text: MepaText.lastname,customstyle:KlTexts.fieldName),
+                                             CustomText(text: "lastname".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.lastNameController,
                                             style:KlTextInputFieldStyle.firstName,
@@ -84,30 +84,30 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
 
                                         SizedBox(height: 10.h),
-                                        CustomText(text: MepaText.email,customstyle:KlTexts.fieldName),
+                                        CustomText(text: "email".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.emailController,
                                             validator: (value) =>KlValidators.emailValitador(
                                                     value)),
                                         SizedBox(height: 10.h),
-                                        CustomText(text: MepaText.password,customstyle:KlTexts.fieldName),
+                                        CustomText(text: "password".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.passwordController,
                                             style: KlTextInputFieldStyle.password,
                                             validator: (value) => KlValidators.logInPasswordValidator(value)),
                                         SizedBox(height: 10.h),
-                                        CustomText(text: MepaText.reenterPassword,customstyle:KlTexts.fieldName),
+                                        CustomText(text: "reenterPassword".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.confirmpasswordController,
                                             style: KlTextInputFieldStyle.password,
-                                            hintText: MepaText.reenterPassword,
+                                            hintText: "reenterPassword".tr,
                                             validator: (value) => KlValidators.logInPasswordValidator(value)),
                                         SizedBox(height: 10.h),
-                                        CustomText(text: MepaText.location,customstyle:KlTexts.fieldName),
+                                        CustomText(text: "location".tr,customstyle:KlTexts.fieldName),
                                         KlTextInputField(
                                           controller: model.locationController,
                                             style: KlTextInputFieldStyle.firstName,
-                                            hintText: MepaText.enterLocation,
+                                            hintText: "enterLocation".tr,
                                             validator: (value) => KlValidators.locationNameValidator(value)),
                                         SizedBox(height: 30.h),
                                         Align(

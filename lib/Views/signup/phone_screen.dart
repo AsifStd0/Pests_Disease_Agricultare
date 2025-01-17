@@ -55,7 +55,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
 
           ),
           ElevatedButton(onPressed: () async {
-            await model.getVerficationCode(context,otpController.text);
+            // await model.getVerficationCode(context,otpController.text);
           }, 
           
            child: Text('Submit'))

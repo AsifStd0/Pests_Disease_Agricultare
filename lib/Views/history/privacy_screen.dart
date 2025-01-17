@@ -1,6 +1,8 @@
+import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class PrivacyScreen extends StatefulWidget {
   const PrivacyScreen({super.key});
@@ -14,14 +16,14 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Privacy '),
+        title:  Text("privacy".tr),
         ),
            body: SingleChildScrollView(
         child: Padding(
           padding:  EdgeInsets.only(top: 20,left: 10.w,right: 10.w), 
           child: Column(children: [
             CustomText(
-              text: 'Privacy Policy',
+              text: "privacyPolicy".tr,
               fontsize: 28.sp,
             ),
             
@@ -30,9 +32,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               alignment: Alignment.center,
                child: Text(
                 overflow: TextOverflow.visible,
-                 '''
-Our app provides farmers with up-to-date weather forecasts and real-time pest disease alerts to help improve productivity.Weather updates, pest alerts, crop disease management''',
-                    style: TextStyle(
+             "privacyDummy".tr,
+                  style: TextStyle(
                 fontSize: 16.sp,
                     ),
                        ),
@@ -44,7 +45,7 @@ SizedBox(height: 30.h,),
                Align(
               alignment: Alignment.center,
                child: CustomText(
-                text: 'Information collection & use ',
+                text: "informationCollectionUse".tr,
                 fontsize: 20.sp,
                        ),
              ),
@@ -53,8 +54,8 @@ SizedBox(height: 30.h,),
               alignment: Alignment.center,
                child: Text(
                 overflow: TextOverflow.visible,
-                 '''Our app provides farmers with up-to-date weather forecasts and real-time pest disease alerts to help improve productivity.Weather updates, pest alerts, crop disease management''',
-                    style: TextStyle(
+                 "privacyDummy".tr,
+                 style: TextStyle(
                 fontSize: 16.sp,
                     ),
                        ),),
@@ -62,7 +63,7 @@ SizedBox(height: 30.h,),
                Align(
               alignment: Alignment.center,
                child: CustomText(
-                text: 'Service providers ',
+                text: "serviceProviders".tr,
                 fontsize: 20.sp,
                        ),
              ),
@@ -72,8 +73,8 @@ SizedBox(height: 30.h,),
               alignment: Alignment.center,
                child: Text(
                 overflow: TextOverflow.visible,
-                 '''Our app provides farmers with up-to-date weather forecasts and real-time pest disease alerts to help improve productivity.Weather updates, pest alerts, crop disease management''',
-                    style: TextStyle(
+                 "privacyDummy".tr,
+                   style: TextStyle(
                 fontSize: 16.sp,
                     ),
                        ),),
@@ -81,7 +82,7 @@ SizedBox(height: 30.h,),
                Align(
               alignment: Alignment.center,
                child: CustomText(
-                text: 'Soil fertility mapping this app  ',
+                text: "soilFertilityMapping".tr,
                 fontsize: 20.sp,
                        ),
              ),
@@ -91,8 +92,8 @@ SizedBox(height: 30.h,),
               alignment: Alignment.center,
                child: Text(
                 overflow: TextOverflow.visible,
-                 '''Our app provides farmers with up-to-date weather forecasts and real-time pest disease alerts to help improve productivity.Weather updates, pest alerts, crop disease management''',
-                    style: TextStyle(
+              "privacyDummy".tr,
+                  style: TextStyle(
                 fontSize: 16.sp,
                     ),
                        ),),

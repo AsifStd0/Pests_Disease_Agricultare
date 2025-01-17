@@ -1,5 +1,7 @@
+import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 enum KlTextInputFieldStyle {
   email,
@@ -120,23 +122,23 @@ class _KlTextInputFieldState extends State<KlTextInputField> {
   String get hintText {
     switch (widget.style) {
       case KlTextInputFieldStyle.email:
-        return widget.hintText ?? "Enter your email";
+        return widget.hintText ?? "enterEmail".tr;
       case KlTextInputFieldStyle.password:
-        return widget.hintText ?? "Password";
+        return widget.hintText ?? "password".tr;
       case KlTextInputFieldStyle.phoneNumber:
-        return widget.hintText ?? "Phone Number";
+        return widget.hintText ?? "enterPhone".tr;
       case KlTextInputFieldStyle.firstName:
-        return widget.hintText ?? "Enter Name";
+        return widget.hintText ??"enterPhone".tr;
       case KlTextInputFieldStyle.userName:
-        return widget.hintText ?? "Username";
+        return widget.hintText ?? "enterUsername".tr;
       case KlTextInputFieldStyle.dropDown:
-        return widget.hintText ?? "Select Date";
+        return widget.hintText ?? "selectDate".tr;
       case KlTextInputFieldStyle.select:
-        return widget.hintText ?? "Select Option";
+        return widget.hintText ?? "selectOption".tr;
       case KlTextInputFieldStyle.search:
-        return widget.hintText ?? "Search";
+        return widget.hintText ?? "search".tr;
       default:
-        return widget.hintText ?? "Enter Text";
+        return widget.hintText ?? "enterText".tr;
     }
   }
 

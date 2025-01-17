@@ -33,14 +33,14 @@ Navigator.of(context).push(
             // Image.asset(MepaImage.success,width: 90.w,height: 90.h,)
               Image.asset(MepaImage.success,width: 110.w,height: 110.h,),
 SizedBox(height: 20.h,),
-            CustomText(text: 'Success!',customstyle:TextStyle(
+            CustomText(text: 'Success!'.tr,customstyle:TextStyle(
                                               fontSize: 23.sp,
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
                 fontFamily: 'Roboto',)),
                 Padding(
                   padding: EdgeInsets.only(top: 20.h,bottom: 60.h),
-                  child: CustomText(text: MepaText.congratulation,maxlines: 2,),
+                  child: CustomText(text: "congratulation".tr,maxlines: 2,),
                 ),
                 
                    Align(
@@ -50,7 +50,7 @@ SizedBox(height: 20.h,),
                         Get.to(()=>HomeScreen());
                       },
                                 style: KlButtonStyle.fullButton,
-                                label: MepaText.confirm
+                                label: "confirm".tr
 
                      ),),
           ],),

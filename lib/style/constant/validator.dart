@@ -48,7 +48,7 @@ class KlValidators {
 
   static final String? Function(String?) secondNameValidator = (secondName) {
     if (secondName!.isEmpty || secondName.trim().isEmpty) {
-      return 'Enter Sure Name';
+      return 'Enter Last Name';
     }
     return null;
   };
@@ -75,7 +75,7 @@ class KlValidators {
     RegExp regex = RegExp(r'^[a-zA-Z0-9_]+$');
     if (userName != null) {
       if (userName.isEmpty || userName.trim().isEmpty) {
-        return 'Required';
+        return 'Enter Name';
       } else if (userName.length < 4) {
         return 'Username must be at least 4 characters long';
       } else if (userName.length >= 48) {

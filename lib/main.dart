@@ -1,5 +1,6 @@
 import 'package:agricultare_weather_pests/Model/provider_path.dart';
 import 'package:agricultare_weather_pests/Views/splashscreen/splashscreen.dart';
+import 'package:agricultare_weather_pests/style/constant/translation_text.dart';
 import 'package:agricultare_weather_pests/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,14 +16,18 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    print('kkkk');
     return MultiProvider(
         providers: providerPath,
         child: ScreenUtilInit(builder: (context, child) {
           return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
-              home:  Splashscreen());
+              home:  Splashscreen(),
+                     locale: const Locale('en', 'US'),
+      translations: GetxTranslations(),
+                fallbackLocale: const Locale('en', 'US'),
+              );
+
         }));
   }
 }

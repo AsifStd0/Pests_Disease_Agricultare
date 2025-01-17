@@ -32,6 +32,16 @@ class LocalStorageService {
     await _prefs.setStringList('listCrops', serializedCrops);
   }
 
+// ! *******
+  // Save the language preference
+  Future<void> saveLanguage(String languageCode) async {
+    await _prefs.setString('language', languageCode);
+  }
+
+  // Load the saved language preference
+  String? loadLanguage() {
+    return _prefs.getString('language');
+  }
   // List<SelectCropsData>? getCrops() {
   //   List<String>? serializedCrops = _prefs.getStringList('listCrops');
 

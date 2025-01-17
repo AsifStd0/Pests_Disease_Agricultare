@@ -20,7 +20,7 @@ class _SnapTipsState extends State<SnapTips> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Snap Tips'),
+          // title: Text('Snap Tips'),
           centerTitle: true,
         ),
         body: Align(
@@ -30,7 +30,7 @@ class _SnapTipsState extends State<SnapTips> {
               Padding(
                 padding: EdgeInsets.only(top: 40.h, bottom: 30.h),
                 child: CustomText(
-                  text: 'Snap Tips',
+                  text: "snapTips".tr,
                   fontsize: 28.sp,
                   fontFamily: 'Roboto',
                   fontweight: FontWeight.w600,
@@ -46,13 +46,71 @@ class _SnapTipsState extends State<SnapTips> {
                       image: AssetImage(MepaImage.leaf),
                     )),
               ),
+
               Spacer(),
               Padding(
-                padding: EdgeInsets.only(bottom: 80.h),
+                padding:  EdgeInsets.symmetric(horizontal: 15.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                   Column(
+                     children: [
+                       Container(
+                                         height: 80,
+                                         width: 80,
+                                         decoration: BoxDecoration(
+                          color: greyColor,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(MepaImage.leaf),
+                          )),
+                                       ),
+                                       SizedBox(height: 5.h,),
+                                       CustomText(text: "tooClose".tr,)
+                     ],
+                   ),
+                   Column(
+                     children: [
+                       Container(
+                                         height: 80,
+                                         width: 80,
+                                         decoration: BoxDecoration(
+                          color: greyColor,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(MepaImage.leaf),
+                          )),
+                                       ),
+                                       SizedBox(height: 5.h,),
+                                       CustomText(text: "tooFar".tr)
+                     ],
+                   ),
+                   Column(
+                     children: [
+                       Container(
+                                         height: 80,
+                                         width: 80,
+                                         decoration: BoxDecoration(
+                          color: greyColor,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(MepaImage.leaf),
+                          )),
+                                       ),
+                                       SizedBox(height: 5.h,),
+                                       CustomText(text: "multipleSpecies".tr,)
+                     ],
+                   ),
+                ],),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(bottom: 60.h,top: 30.h),
                 child: KlButton(
                   style: KlButtonStyle.detect,
+                  buttonColor: mainColor,
                   borderRadius: BorderRadius.circular(30.r),
-                  label: MepaText.continueTxt,
+                  label: "continueTxt".tr,
                   onPressed: () => Get.to(() => HomeScreen()),
                 ),
               ),

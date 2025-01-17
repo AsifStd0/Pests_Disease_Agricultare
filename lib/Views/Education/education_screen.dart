@@ -1,5 +1,6 @@
 import 'package:agricultare_weather_pests/Views/Education/education_detail.dart';
 import 'package:agricultare_weather_pests/style/CustomText/custom_back_button.dart';
+import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,13 +16,19 @@ class EducationScreen extends StatefulWidget {
 class _EducationScreenState extends State<EducationScreen> {
 
   List<String> cropsName = [
-'Maiz','Rice','Cotton','SugarCane','Jowar'
+    "maize".tr,
+    "rice".tr,
+    "cotton".tr,
+    "sugarCane".tr,
+    "jowar".tr,
+
+// 'Maiz','Rice','Cotton','SugarCane','Jowar'
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
                     appBar:AppBar(
-                      title: Text('Crops',),
+                      title: Text("crops".tr,),
                       centerTitle: true,
           leading: CircularBackButton(
             

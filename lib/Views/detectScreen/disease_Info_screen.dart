@@ -59,10 +59,10 @@ class DiseaseInfoScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
             if (disease.predictedClass.isNotEmpty) ...[
-                buildInfoRow('Predicted Class:', disease.predictedClass),
-                buildInfoRow('Symptoms:', disease.treatment),
-                buildInfoRow('Confidence:', disease.confidence),
-                buildInfoRow('Cure:', disease.precautions),
+                buildInfoRow('Predicted Disease : ', disease.predictedClass),
+                buildInfoRow('Treatment : ', disease.treatment),
+                buildInfoRow('Confidence : ', disease.confidence),
+                buildInfoRow('Precaution : ', disease.precautions),
               ] else
                  Center(
                   child: Text(
@@ -98,15 +98,15 @@ Widget buildInfoRow(String label, String info) {
     child: RichText(
       textAlign: TextAlign.start,
       text: TextSpan(
-        style: TextStyle(fontSize: 15.sp, color: Colors.black), // Default text style
+        style: TextStyle(fontSize: 17.sp, color: Colors.black), // Default text style
         children: [
           TextSpan(
             text: label,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold,color: Colors.blue.withOpacity(0.8)), // Label style
+            style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold,color: mainColor), // Label style
           ),
           TextSpan(
             text: info,
-            style: TextStyle(fontSize: 15.sp), 
+            style: TextStyle(fontSize: 17.sp), 
           ),
         ],
       ),

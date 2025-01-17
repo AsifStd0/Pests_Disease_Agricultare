@@ -50,7 +50,7 @@ Navigator.of(context).push(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     //  Text('Enter your email to reset your password'),
-                                    CustomText(text: MepaText.forgot,customstyle:TextStyle(
+                                    CustomText(text: "forgot".tr,customstyle:TextStyle(
                                             fontSize: 23.sp,
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -58,7 +58,7 @@ Navigator.of(context).push(
                                     Padding(
                     padding:  EdgeInsets.only(top: 80.h,bottom: 90.h),
                     child: KlTextInputField(
-                                  controller: model.forgotemailController,
+                                  // controller: model.forgotemailController,
                                    validator: (value) =>KlValidators.emailValitador(value)
                     ),
                                     ),
@@ -67,20 +67,21 @@ Navigator.of(context).push(
                        child: KlButton(
                                   style: KlButtonStyle.fullButton,
                                   borderRadius: BorderRadius.circular(30.r),
-                                  label: MepaText.sendemail,
+                                  label: "sendemail".tr,
                                   onPressed: () {
                                     print('Clicked');
-                                                        if (formKey.currentState!.validate()) {
-                                                                 if (model.forgotemailController.text.isNotEmpty) {
+                                                        // if (formKey.currentState!.validate()) {
+                                                                //  if (model.forgotemailController.text.isNotEmpty) {
                                                           // model.SignUp(context);
                                                           Get.offAll(()=>ForgotOtp());
-                                                          }
-                                                          else{
-                                                           Get.snackbar(
-                                                              "Error!",
-                                                              MepaText.passidentical,
-                                                              backgroundColor:Colors.amber,
-                                                              snackPosition:SnackPosition.BOTTOM);} }}),
+                                                          // }
+                                                          // else{
+                                                          //  Get.snackbar(
+                                                          //     "Error!",
+                                                          //     "passidentical".tr,
+                                                          //     backgroundColor:Colors.amber,
+                                                          //     snackPosition:SnackPosition.BOTTOM);} }
+                                                          }),
                      )  
                                   ]),
                               ))

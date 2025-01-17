@@ -9,8 +9,10 @@ Future<DiseaseModel> fetchDiseaseData(File imageFile) async {
     log('Sending image to the API...');
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://nlpgenius-cropdisease.hf.space'), // API Endpoint
+      Uri.parse('https://nlpgenius-cropdisease.hf.space'),
     );
+
+    
     request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
     final response = await request.send();
 
@@ -28,3 +30,4 @@ Future<DiseaseModel> fetchDiseaseData(File imageFile) async {
     throw Exception('Error fetching disease data');
   }
 }
+

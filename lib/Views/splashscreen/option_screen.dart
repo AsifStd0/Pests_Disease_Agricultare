@@ -21,7 +21,7 @@ class _OptionScreenState extends State<OptionScreen> {
           appBar: AppBar(
             automaticallyImplyLeading: false, 
             centerTitle: true,
-            title: Text(MepaText.pests)
+            title: Text("pests".tr)
           ),
          body: Center(
                  child: Column(
@@ -29,7 +29,7 @@ class _OptionScreenState extends State<OptionScreen> {
                children: [
                  KlButton(
           style: KlButtonStyle.skip,
-          label: MepaText.signUp,
+          label: "signUp".tr,
           borderRadius: BorderRadius.circular(30.r),
           onPressed: () => Get.to(()=> Signup())
          
@@ -37,7 +37,7 @@ class _OptionScreenState extends State<OptionScreen> {
                  SizedBox(height: 60.h),
                  KlButton(
           style: KlButtonStyle.skip,
-          label: MepaText.skip,
+          label: "skip".tr,
           borderRadius: BorderRadius.circular(30.r),
           onPressed: () => Get.to(()=> HomeScreen())
                  )

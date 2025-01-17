@@ -38,7 +38,7 @@ body: Padding(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-    CustomText(text: MepaText.verificaionCode,customstyle:TextStyle(
+    CustomText(text: "verificaionCode".tr,customstyle:TextStyle(
                                           fontSize: 23.sp,
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
@@ -47,7 +47,7 @@ body: Padding(
               padding:  EdgeInsets.only(top: 30.h,right: 50.w),
       
       child: CustomText(
-        text: MepaText.verificaionCodeText,
+        text: "verificaionCodeText".tr,
         textAlign: TextAlign.start,
         color: greyColor,
         maxlines: 2,
@@ -99,7 +99,7 @@ body: Padding(
                       Get.to(()=>ResetPassword());
                     },
                                 style: KlButtonStyle.fullButton,
-                    label: MepaText.confirm,
+                    label: "confirm".tr,
 
                      ),),
   ],),

@@ -38,7 +38,7 @@ Navigator.of(context).push(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            CustomText(text: MepaText.newPassword,customstyle:TextStyle(
+            CustomText(text: "newPassword".tr,customstyle:TextStyle(
                                             fontSize: 23.sp,
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
@@ -47,7 +47,7 @@ Navigator.of(context).push(
                 padding:  EdgeInsets.only(top: 30.h,right: 50.w),
         
         child: CustomText(
-          text: MepaText.verificaionCodeText,
+          text: "verificaionCodeText".tr,
           textAlign: TextAlign.start,
           color: greyColor,
           maxlines: 2,
@@ -62,7 +62,7 @@ Navigator.of(context).push(
   style: KlTextInputFieldStyle.password, // Set the style to password
   prefixIcon: Icon(Icons.lock, color: greyColor),
   padding: EdgeInsets.all(0),
-  hintText: MepaText.confirmPassword,
+  hintText: "confirmPassword".tr,
   validator: (value) => KlValidators.logInPasswordValidator(value),
 ),
 SizedBox(height: 20.h,),
@@ -71,7 +71,7 @@ SizedBox(height: 20.h,),
   style: KlTextInputFieldStyle.password, // Set the style to password
   prefixIcon: Icon(Icons.lock, color: greyColor),
   padding: EdgeInsets.all(0),
-  hintText: MepaText.confirmPassword,
+  hintText: "confirmPassword".tr,
   validator: (value) => KlValidators.logInPasswordValidator(value),
 ),
 
@@ -84,7 +84,7 @@ SizedBox(height: 20.h,),
                            child: KlButton(
                                       style: KlButtonStyle.fullButton,
                                       borderRadius: BorderRadius.circular(30.r),
-                                      label: MepaText.confirm,
+                                      label: "confirm".tr,
                                       onPressed: () {
                                         Get.to(()=>SuccessScreen());
                                       }),

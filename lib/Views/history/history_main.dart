@@ -19,7 +19,7 @@ class _HistoryMainState extends State<HistoryMain> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Pest Detection'),
+          title: Text("pests".tr),
           centerTitle: true,
           leading: CircularBackButton(
             onPressed: () {
@@ -47,11 +47,11 @@ class _HistoryMainState extends State<HistoryMain> {
                                               CrossAxisAlignment.start,
                                           children: [
                                         CustomText(
-                                            text: 'Hoya carnosa tricolor',
+                                            text: "hoyaCarnosaTricolor".tr,
                                             fontsize: 18.sp,
                                             fontweight: FontWeight.w700,
                                             color: blackColor),
-                                        Text(MepaText.dummy,
+                                        Text("dummy".tr,
                                             style: TextStyle(
                                                 fontSize: 14.sp,
                                                 color: Colors.grey[800]),

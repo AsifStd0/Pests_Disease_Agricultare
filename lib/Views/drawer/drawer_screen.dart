@@ -1,3 +1,4 @@
+import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Views/AboutUs/aboutUs.dart';
 import 'package:agricultare_weather_pests/Views/ContactUs/contact_us.dart';
 import 'package:agricultare_weather_pests/Views/dialogs/custom_dialog.dart';
@@ -5,10 +6,110 @@ import 'package:agricultare_weather_pests/Views/education/education_screen.dart'
 import 'package:agricultare_weather_pests/Views/history/history_main.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
+import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
+
+import '../login_screen.dart/login_provider.dart';
+// class MenuWidget extends StatelessWidget {
+//   List<IconData> listIcons = [
+//     Icons.home,
+//     Icons.person,
+//     Icons.edit,
+//     Icons.history,
+//     Icons.cast_for_education,
+//     Icons.logout,
+//   ];
+
+//   List menuData = [
+//     "home".tr,
+//     "aboutUs".tr,
+//     "editProfile".tr,
+//     "history".tr,
+//     "education".tr,
+//     "logout".tr,
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+
+//       body:
+      
+//        ListView.builder(
+//         itemCount: menuData.length,
+//         itemBuilder: (context, index) {
+//           return Padding(
+//             padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
+//             child: GestureDetector(
+//               onTap: () {
+//                 print('$index  ${menuData.length}');
+//                 if (index == menuData.length - 1) {
+//                   showLogout(context); // Replace with your logout logic
+//                 } else {
+//                   navigateToScreen(index, context);
+//                 }
+//               },
+//               child: Row(
+//                 children: [
+//                   Container(
+//                     decoration: BoxDecoration(
+//                       shape: BoxShape.circle,
+//                       color: mainColor,
+//                     ),
+//                     child: Padding(
+//                       padding: EdgeInsets.all(8.sp),
+//                       child: Icon(listIcons[index], color: whiteColor, size: 22.sp),
+//                     ),
+//                   ),
+//                   SizedBox(width: 10.w),
+//                   Text(
+//                     menuData[index],
+//                     style: TextStyle(
+//                       fontSize: 18.sp,
+//                       fontWeight: FontWeight.w600,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+
+//   void navigateToScreen(int index, BuildContext context) {
+//     switch (index) {
+//       case 0:
+//         Get.offAll(() => HomeScreen());
+//         break;
+//       case 1:
+//         Get.to(() => Aboutus());
+//         break;
+//       case 3:
+//         Get.to(() => HistoryMain());
+//         break;
+//       case 4:
+//         Get.to(() => EducationScreen());
+//         break;
+//       case 5:
+//         Get.to(() => ContactUsPage());
+//         break;
+//       default:
+//         break;
+//     }
+//   }
+
+//   void showLogout(BuildContext context) {
+//     // Implement logout logic here
+//   }
+// }
 
 class MenuWidget extends StatelessWidget {
   List<IconData> listIcons = [
@@ -20,120 +121,115 @@ class MenuWidget extends StatelessWidget {
     Icons.logout,
   ];
   List menuData = [
-    'Home',
-    'About us',
-    'Edit Profile',
-    'History',
-    'Education',
-    'Logout'
+  "home".tr,
+  "aboutUs".tr,
+  "editProfile".tr,
+  "history".tr,
+  "education".tr,
+  "logout".tr
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        // padding: EdgeInsets.only(top: 50),
-        child: Column(children: [
-          // Padding(
-          //     padding:  EdgeInsets.only(bottom: 10.h,top: 10.h,left: 20.h),
-          //     child: Row(children: [
-          //       CircleAvatar(
-          //         radius: 30,
-          //         backgroundColor: Colors.grey,
-          //         child: Icon(Icons.person, size: 40, color: Colors.white),
-          //       ),
-          //       SizedBox(width: 10),
-          //       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          //         Text("Name",
-          //             style: TextStyle(
-          //                 fontSize: 20.sp, fontWeight: FontWeight.bold)),
-          //         SizedBox(height: 4),
-          //         GestureDetector(
-          //             onTap: () {
-          //               Get.to(()=> EditprofileScreen());
-          //             },
-          //             child: Text("Edit",
-          //                 style:
-          //                     TextStyle(color: Colors.blue, fontSize: 14.sp)))
-          //       ])
-          //     ])),
-          // Divider(),
-          Container(
-            height: 100,
-            width: double.infinity,
-            color: mainColor,
-            child: Align(
-              alignment: Alignment.center,
-              child: CustomText(text: 'Pest Detection',fontsize: 22.sp,color: whiteColor,fontweight: FontWeight.bold,)),
-          ),
-          SizedBox(height: 60.h),
-           Expanded(
-            child: ListView.builder(
-              itemCount: menuData.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      print('$index  ${menuData.length}');
-                      if(index == menuData.length-1){
-                        showLogout(context); 
-                      }
-                    else  if(index == 0 ){
-                        print('home');
-
-                        Get.to(()=>HomeScreen());
-                      }
-                        else  if (index == 1) {
-                        print('About Us');
-
-
-                        Get.to(()=>Aboutus());
-                      }
-                      else  if (index == 3) {
-                                                print('HistoryScreen 111');
-
-                        Get.to(()=>HistoryMain());
-                      }
-                        else  if (index == 4) {
-                                                  print('No Screen');
-                                                  Get.to(()=> EducationScreen());
-                      }
-
-                           else  if (index == 5) {
-                                                  print('ContactUsPage');
-
-                        Get.to(()=>ContactUsPage());
-                      }},
-                    child:
-                    
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: mainColor,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.sp),
-                            child: Icon(listIcons[index],color: whiteColor,size: 22.sp,),
-                          )),
-                          SizedBox(width: 10.w),
-                        Text(
-                                menuData[index],
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black
-                                )
-                              ),
-                      ],
-                    )
+    return Scaffold(
+      body: Container(
+        color: mainColor,
+        child: Consumer(
+                builder: (context, LoginProvider provider, child) {
+                  return ModalProgressHUD(
+                    inAsyncCall: provider.state == ViewState.busy,
+                    progressIndicator: CircularProgressIndicator(color: mainColor),
+                    child: Column(children: [
+        
+                // Container(
+                //   height: 100,
+                //   width: double.infinity,
+                //   color: mainColor,
+                //   child: Align(
+                //     alignment: Alignment.center,
+                //     child: CustomText(text:"pestDetection".tr,fontsize: 22.sp,color: whiteColor,fontweight: FontWeight.bold,)),
+                // ),
+                SizedBox(height: 60.h),
+                 Expanded(
+                  child: ListView.builder(
+                    itemCount: menuData.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            print('$index  ${menuData.length}');
+                            if(index == menuData.length-1){
+        
+                              // ! logout
+                              showLogout(context,provider); 
+                            }
+                         else if (index == 0) {
+        print('home');
+        // Ensure progress is not blocking navigation
+        if (provider.state != ViewState.busy) {
+          Get.offAll(() => HomeScreen());
+        }
+          }
+                              else  if (index == 1) {
+                              print('About Us');
+          
+          
+                              Get.to(()=>Aboutus());
+                            }
+                            else  if (index == 3) {
+                                                      print('HistoryScreen 111');
+          
+                              Get.to(()=>HistoryMain());
+                            }
+                              else  if (index == 4) {
+                                                        print('No Screen');
+                                                        Get.to(()=> EducationScreen());
+                            }
+          
+                                 else  if (index == 5) {
+                                                        print('ContactUsPage');
+          
+                              Get.to(()=>ContactUsPage());
+                            }},
+                          child:
+                          
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: mainColor,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.sp),
+                                  child: Icon(listIcons[index],color: whiteColor,size: 22.sp,),
+                                )),
+                                SizedBox(width: 10.w),
+                              Text(
+                                      menuData[index],
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        // fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black
+                                      )
+                                    ),
+                            ],
+                          )
+                        )
+                      );
+                    }
                   )
-                );
-              }
-            )
-           )
-        ]));
+                 )
+              ]
+              
+              )
+          
+          );
+          }
+        ),
+      ),
+    );
   }
 }
