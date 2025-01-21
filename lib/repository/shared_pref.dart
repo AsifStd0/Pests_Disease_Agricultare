@@ -42,13 +42,6 @@ class LocalStorageService {
   String? loadLanguage() {
     return _prefs.getString('language');
   }
-  // List<SelectCropsData>? getCrops() {
-  //   List<String>? serializedCrops = _prefs.getStringList('listCrops');
 
-  //   return serializedCrops.map((cropString) {
-  //     Map<String, dynamic> cropMap = jsonDecode(cropString);
-  //     return SelectCropsData(name: cropMap['name'], image: cropMap['image']);
-  //   }).toList();
-  // }
 }
 

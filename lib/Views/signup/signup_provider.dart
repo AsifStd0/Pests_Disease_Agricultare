@@ -5,6 +5,7 @@ import 'package:agricultare_weather_pests/Model/base_view_model.dart';
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
+import 'package:agricultare_weather_pests/repository/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -52,28 +53,30 @@ class SignupProvider extends BaseViewModel {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('user_id', userId);  // Save user ID
         prefs.setString('user_data', json.encode(userDataModel.toJson()));  // Save full user data
-  // Check if a language preference is already saved
-String? currentLanguage = prefs.getString('language');
 
-// If no preference exists, set the default language to English
-if (currentLanguage == null) {
-  String languageCode = 'en'; // Default to English
-  prefs.setString('language', languageCode);
-  log('Language preference not found. Setting default to: $languageCode');
-} else {
-  log('Language preference already exists: $currentLanguage');
-}
+            LocalStorageService storageService = LocalStorageService(prefs);
 
-// Apply the language preference
-if (currentLanguage == 'ur') {
-  log('Setting language to Urdu');
-  // Set app locale to Urdu
-  Get.updateLocale(Locale('ur'));
-} else {
-  log('Setting language to English');
-  // Set app locale to English (default)
-  Get.updateLocale(Locale('en'));
-}
+  // Check and apply language preference
+      String? currentLanguage = storageService.loadLanguage();
+
+      if (currentLanguage == null) {
+        String languageCode = 'en'; // Default to English
+        await storageService.saveLanguage(languageCode);
+        log('Language preference not found. Setting default to: $languageCode');
+        currentLanguage = languageCode;
+      } else {
+        log('Language preference already exists: $currentLanguage');
+      }
+
+      // Apply the language preference
+      if (currentLanguage == 'ur') {
+        log('Setting language to Urdu');
+        Get.updateLocale(Locale('ur'));
+      } else {
+        log('Setting language to English');
+        Get.updateLocale(Locale('en'));
+      }
+
   // // Check if a language preference is already saved
       // String? currentLanguage = prefs.getString('language');
       // if (currentLanguage == null) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Views/AboutUs/aboutUs.dart';
 import 'package:agricultare_weather_pests/Views/ContactUs/contact_us.dart';
@@ -17,119 +19,41 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
 import '../login_screen.dart/login_provider.dart';
-// class MenuWidget extends StatelessWidget {
-//   List<IconData> listIcons = [
-//     Icons.home,
-//     Icons.person,
-//     Icons.edit,
-//     Icons.history,
-//     Icons.cast_for_education,
-//     Icons.logout,
-//   ];
 
-//   List menuData = [
-//     "home".tr,
-//     "aboutUs".tr,
-//     "editProfile".tr,
-//     "history".tr,
-//     "education".tr,
-//     "logout".tr,
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-
-//       body:
-      
-//        ListView.builder(
-//         itemCount: menuData.length,
-//         itemBuilder: (context, index) {
-//           return Padding(
-//             padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
-//             child: GestureDetector(
-//               onTap: () {
-//                 print('$index  ${menuData.length}');
-//                 if (index == menuData.length - 1) {
-//                   showLogout(context); // Replace with your logout logic
-//                 } else {
-//                   navigateToScreen(index, context);
-//                 }
-//               },
-//               child: Row(
-//                 children: [
-//                   Container(
-//                     decoration: BoxDecoration(
-//                       shape: BoxShape.circle,
-//                       color: mainColor,
-//                     ),
-//                     child: Padding(
-//                       padding: EdgeInsets.all(8.sp),
-//                       child: Icon(listIcons[index], color: whiteColor, size: 22.sp),
-//                     ),
-//                   ),
-//                   SizedBox(width: 10.w),
-//                   Text(
-//                     menuData[index],
-//                     style: TextStyle(
-//                       fontSize: 18.sp,
-//                       fontWeight: FontWeight.w600,
-//                       color: Colors.black,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-
-//   void navigateToScreen(int index, BuildContext context) {
-//     switch (index) {
-//       case 0:
-//         Get.offAll(() => HomeScreen());
-//         break;
-//       case 1:
-//         Get.to(() => Aboutus());
-//         break;
-//       case 3:
-//         Get.to(() => HistoryMain());
-//         break;
-//       case 4:
-//         Get.to(() => EducationScreen());
-//         break;
-//       case 5:
-//         Get.to(() => ContactUsPage());
-//         break;
-//       default:
-//         break;
-//     }
-//   }
-
-//   void showLogout(BuildContext context) {
-//     // Implement logout logic here
-//   }
-// }
-
+import 'package:shared_preferences/shared_preferences.dart';
 class MenuWidget extends StatelessWidget {
-  List<IconData> listIcons = [
+  final List<IconData> allIcons = [
     Icons.home,
     Icons.person,
-    Icons.edit,
+    // Icons.edit,
     Icons.history,
     Icons.cast_for_education,
     Icons.logout,
   ];
-  List menuData = [
-  "home".tr,
-  "aboutUs".tr,
-  "editProfile".tr,
-  "history".tr,
-  "education".tr,
-  "logout".tr
+
+  final List allMenuData = [
+    "home".tr,
+    "aboutUs".tr,
+    // "editProfile".tr,
+    "history".tr,
+    "education".tr,
+    "logout".tr,
   ];
+
+  Future<List<Map<String, dynamic>>> getFilteredMenuData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('user_id');
+
+    List<Map<String, dynamic>> menuList = [];
+    for (int i = 0; i < allMenuData.length; i++) {
+      if (userId == null && (i == 2 || i == 4 )) {
+        // Skip Edit Profile, History, and Logout if ID is null
+        continue;
+      }
+      menuList.add({'title': allMenuData[i], 'icon': allIcons[i]});
+    }
+    return menuList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,137 +61,99 @@ class MenuWidget extends StatelessWidget {
       body: Container(
         color: whiteColor,
         child: Consumer(
-                builder: (context, LoginProvider provider, child) {
-                  return ModalProgressHUD(
-                    inAsyncCall: provider.state == ViewState.busy,
-                    progressIndicator: CircularProgressIndicator(color: mainColor),
-                    child: Column(children: [
+          builder: (context, LoginProvider provider, child) {
+            return ModalProgressHUD(
+              inAsyncCall: provider.state == ViewState.busy,
+              progressIndicator: CircularProgressIndicator(color: mainColor),
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: getFilteredMenuData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError || !snapshot.hasData) {
+                    return Center(child: Text("Error loading menu"));
+                  }
+
+                  final menuList = snapshot.data!;
+
+                  return Column(
+                    children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 30.h,right: 30.w),
+                        padding: EdgeInsets.only(top: 30.h, right: 30.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-
-                          GestureDetector(
-                            onTap: () {
-                                  Get.off(() => HomeScreen());
-                            },
-                            child: Icon(
-                              Icons.highlight_remove_outlined,
+                            GestureDetector(
+                              onTap: () {
+                                log('Close Drawer');
+          Navigator.of(context).pop(); 
+          Get.off(() => HomeScreen());
+                                     },
+                              child: Icon(Icons.highlight_remove_outlined,color: mainColor,),
                             ),
-                          )
-                        ],),
+                          ],
+                        ),
                       ),
-     
-  Padding(
-
-    padding:  EdgeInsets.only(top: 10.h),
-    child: ClipOval(
-    child: Container(
-      width: 130,
-      height: 130, // Ensures the container is a square
-      decoration: BoxDecoration(
-        color: Colors.transparent, // Optional: Background color if needed
-      ),
-      child: Image.asset(
-        MepaImage.splashLogo,
-        fit: BoxFit.cover, // Ensures the image covers the container uniformly
-      ),
-    ),
-    ),
-  ),
-
-                // Container(
-                //   height: 100,
-                //   width: double.infinity,
-                //   color: mainColor,
-                //   child: Align(
-                //     alignment: Alignment.center,
-                //     child: CustomText(text:"pestDetection".tr,fontsize: 22.sp,color: whiteColor,fontweight: FontWeight.bold,)),
-                // ),
-                 Expanded(
-                  child: ListView.builder(
-                    itemCount: menuData.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 25.w),
-                        child: GestureDetector(
-                          onTap: () {
-                            print('$index  ${menuData.length}');
-                            if(index == menuData.length-1){
-        
-                              // ! logout
-                              showLogout(context,provider); 
-                            }
-                         else if (index == 0) {
-        print('home');
-        // Ensure progress is not blocking navigation
-        if (provider.state != ViewState.busy) {
-          Get.offAll(() => HomeScreen());
-        }
-          }
-                              else  if (index == 1) {
-                              print('About Us');
-          
-          
-                              Get.to(()=>Aboutus());
-                            }
-                            else if(index == 2){
-                              Get.to(()=> EditprofileScreen());
-                            }
-                            else  if (index == 3) {
-                                                      print('HistoryScreen 111');
-          
-                              Get.to(()=>HistoryMain());
-                            }
-                              else  if (index == 4) {
-                                                        print('No Screen');
-                                                        Get.to(()=> EducationScreen());
-                            }
-          
-                                 else  if (index == 5) {
-                                                        print('ContactUsPage');
-          
-                              Get.to(()=>ContactUsPage());
-                            }},
-                          child:
-                          
-                          Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: mainColor,
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.sp),
-                                  child: Icon(listIcons[index],color: whiteColor,size: 22.sp,),
-                                )),
-                                SizedBox(width: 10.w),
-                              Text(
-                                      menuData[index],
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.h),
+                        child: ClipOval(
+                          child: Container(
+                            width: 150.w,
+                            height: 130.h,
+                            child: Image.asset(
+                              MepaImage.splashLogo,
+                              fit: BoxFit.cover)))),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: menuList.length,
+                          itemBuilder: (context, index) {
+                            final item = menuList[index];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15.h, horizontal: 25.w),
+                              child: GestureDetector(
+                                onTap: () {
+                                  switch (index) {
+                                    case 0:
+                                      Get.offAll(() => HomeScreen());
+                                      break;
+                                    case 1:
+                                      Get.to(() => Aboutus());
+                                      break;
+                                    case 2:
+                                      Get.to(() => HistoryMain());
+                                      break;
+                                    case 3:
+                                      Get.to(() => EducationScreen());
+                                      break;
+                                    case 4:
+                                      showLogout(context, provider);
+                                      break;
+                                  }
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: mainColor),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.sp),
+                                        child: Icon(
+                                          item['icon'],
+                                          color: whiteColor,
+                                          size: 22.sp))),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      item['title'],
                                       style: TextStyle(
                                         fontSize: 18.sp,
-                                        // fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w600,
-                                        color: Colors.black
-                                      )
-                                    ),
-                            ],
-                          )
-                        )
-                      );
-                    }
-                  )
-                 )
-              ]
-              
-              )
-          
-          );
-          }
-        ),
-      ),
-    );
+                                        color: Colors.black))])));
+                          }))]);
+                }));
+          })));
   }
 }

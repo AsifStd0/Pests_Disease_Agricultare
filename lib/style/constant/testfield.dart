@@ -66,24 +66,15 @@ class _KlTextInputFieldState extends State<KlTextInputField> {
   String get hintText {
     switch (widget.style) {
       case KlTextInputFieldStyle.email:
-        return widget.hintText ?? "enterEmail".tr;
-      case KlTextInputFieldStyle.password:
-        return widget.hintText ?? "password".tr;
-      case KlTextInputFieldStyle.phoneNumber:
-        return widget.hintText ?? "enterPhone".tr;
-      case KlTextInputFieldStyle.firstName:
-        return widget.hintText ??"enterPhone".tr;
-      case KlTextInputFieldStyle.userName:
-        return widget.hintText ?? "enterUsername".tr;
-      case KlTextInputFieldStyle.dropDown:
-        return widget.hintText ?? "selectDate".tr;
-      case KlTextInputFieldStyle.select:
-        return widget.hintText ?? "selectOption".tr;
-      case KlTextInputFieldStyle.search:
-        return widget.hintText ?? "search".tr;
-      default:
-        return widget.hintText ?? "enterText".tr;
-    }
+        return widget.hintText ?? "enterEmail".tr;   case KlTextInputFieldStyle.password:
+        return widget.hintText ?? "password".tr;   case KlTextInputFieldStyle.phoneNumber:
+        return widget.hintText ?? "enterPhone".tr;   case KlTextInputFieldStyle.firstName:
+        return widget.hintText ??"enterPhone".tr;   case KlTextInputFieldStyle.userName:
+        return widget.hintText ?? "enterUsername".tr;   case KlTextInputFieldStyle.dropDown:
+        return widget.hintText ?? "selectDate".tr;   case KlTextInputFieldStyle.select:
+        return widget.hintText ?? "selectOption".tr;   case KlTextInputFieldStyle.search:
+        return widget.hintText ?? "search".tr;   default:
+        return widget.hintText ?? "enterText".tr;   }
   }
 
   bool get isObscure {
@@ -122,12 +113,3 @@ class _KlTextInputFieldState extends State<KlTextInputField> {
   }
 }
 
-class Pixels {
-  static double height(BuildContext context, double height) {
-    return (MediaQuery.of(context).size.height * height) / 926;
-  }
-
-  static double width(BuildContext context, double width) {
-    return (MediaQuery.of(context).size.width * width) / 428;
-  }
-}

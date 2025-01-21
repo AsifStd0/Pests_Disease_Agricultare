@@ -3,8 +3,10 @@ import 'dart:developer';
 
 import 'package:agricultare_weather_pests/Model/base_view_model.dart';
 import 'package:agricultare_weather_pests/Model/enum.dart';
+import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
+import 'package:agricultare_weather_pests/repository/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +17,9 @@ class LoginProvider extends BaseViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 Future<void> login(BuildContext context) async {
+  // ! &&&&&&&&&&&&&&&&&
   // Set the state to busy to indicate a loading state
+  // !*********
   setState(ViewState.busy);
 
   final String email = emailController.text.trim();
@@ -24,12 +28,9 @@ Future<void> login(BuildContext context) async {
   // Log credentials (only for debugging; remove in production)
   log('Email: $email, Password: $password');
 
-  final Map<String, String> loginData = {
-    'email': email,
-    'password': password};
+  final Map<String, String> loginData = {'email': email,'password': password};
 
   try {
-    // API Call
     log('Calling');
     final response = await http.post(
       Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/login'),
@@ -46,9 +47,21 @@ Future<void> login(BuildContext context) async {
 
       // Access the first item in the 'data' array
       var user = responseData['data'][0];
+      userdata_model = UserDataModel(
+        id: user['_id'] ?? '',
+        email: user['email'] ?? '',
+        firstName: user['first_name'] ?? '',
+        lastName: user['last_name'] ?? '',
+      );
 
       // Save user data to SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      // ! ************
+            LocalStorageService storageService = LocalStorageService(prefs);
+
+            
+            // ! *********
+
 
       // Save individual fields for quick access
       prefs.setString('user_id', user['_id'] ?? '');
@@ -60,39 +73,27 @@ Future<void> login(BuildContext context) async {
       // Optionally save the entire response for later use
       prefs.setString('user_data', json.encode(responseData));
       // ! *******
-// Check if a language preference is already saved
-String? currentLanguage = prefs.getString('language');
+  // Check and apply language preference
+      String? currentLanguage = storageService.loadLanguage();
 
-// If no preference exists, set the default language to English
-if (currentLanguage == null) {
-  String languageCode = 'en'; // Default to English
-  prefs.setString('language', languageCode);
-  log('Language preference not found. Setting default to: $languageCode');
-} else {
-  log('Language preference already exists: $currentLanguage');
-}
+      if (currentLanguage == null) {
+        String languageCode = 'en'; // Default to English
+        await storageService.saveLanguage(languageCode);
+        log('Language preference not found. Setting default to: $languageCode');
+        currentLanguage = languageCode;
+      } else {
+        log('Language preference already exists: $currentLanguage');
+      }
 
-// Apply the language preference
-if (currentLanguage == 'ur') {
-  log('Setting language to Urdu');
-  // Set app locale to Urdu
-  Get.updateLocale(Locale('ur'));
-} else {
-  log('Setting language to English');
-  // Set app locale to English (default)
-  Get.updateLocale(Locale('en'));
-}
+      // Apply the language preference
+      if (currentLanguage == 'ur') {
+        log('Setting language to Urdu');
+        Get.updateLocale(Locale('ur'));
+      } else {
+        log('Setting language to English');
+        Get.updateLocale(Locale('en'));
+      }
 
-      // // Check if a language preference is already saved
-      // String? currentLanguage = prefs.getString('language');
-      // if (currentLanguage == null) {
-      //   // Set default language preference if not already set
-      //   String languageCode = 'en'; // Or dynamically detect language
-      //   prefs.setString('language', languageCode);
-      //   log('Language preference set to: $languageCode');
-      // } else {
-      //   log('Language preference already exists: $currentLanguage');
-      // }
 // ! **********
       // Navigate to the HomeScreen
       Get.off(() => HomeScreen());
@@ -196,8 +197,14 @@ if (currentLanguage == 'ur') {
                 if (response.statusCode == 200) {
                   // Logout successful
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  await prefs.clear(); // Clear all user data from local storage
-
+                  // await prefs.clear(); // Clear all user data from local storage
+//  prefs.setString('user_data', json.encode(responseData));
+await prefs.remove('user_data');
+await prefs.remove('user_id');
+await prefs.remove('user_email');
+await prefs.remove('user_first_name');
+await prefs.remove('user_last_name');
+await prefs.remove('user_role');
                   // Redirect to Login screen
                   Get.offAll(() => Loginscreen());
                   log('User logged out successfully');

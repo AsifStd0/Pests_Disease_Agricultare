@@ -1,16 +1,14 @@
 import 'dart:ui';
 
 import 'package:agricultare_weather_pests/Model/enum.dart';
+import 'package:agricultare_weather_pests/Views/Forgot_Password/forgot_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_provider.dart';
-import 'package:agricultare_weather_pests/bottom_navbar.dart';
-import 'package:agricultare_weather_pests/Views/Forgot_Password/forgot_screen.dart';
 import 'package:agricultare_weather_pests/Views/signup/signup.dart';
 import 'package:agricultare_weather_pests/style/CustomText/customtext_navigation.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
 import 'package:agricultare_weather_pests/style/constant/testfield.dart';
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/style/constant/validator.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
@@ -64,6 +62,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 label: "skip".tr,
                                 style: KlButtonStyle.smallSkip,
                                 onPressed: () {
+                                    Get.updateLocale(const Locale('en', 'US'));  // Set language to English
                                   Get.to(() => HomeScreen());
                                 },
                                 textStyle: TextStyle(color: whiteColor,fontSize: 11.sp)

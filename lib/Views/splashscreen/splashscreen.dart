@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
@@ -24,43 +26,39 @@ void initState() {
   super.initState();
   checkUserExists();
 }
+  Future<void> checkUserExists() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('user_id');
 
-// Function to check if the user exists by checking user ID
-Future<void> checkUserExists() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? userId = prefs.getString('user_id');
+    await Future.delayed(Duration(seconds: 2)); // Simulate loading
 
-  await Future.delayed(Duration(seconds: 2)); // Delay to simulate loading
-
-  if (userId != null) {
-    // User exists, check language preference and navigate to HomeScreen
-    String? languageCode = prefs.getString('language'); // Get the language from SharedPreferences
-
-    // Set the app's locale based on the stored language preference
-    if (languageCode != null) {
-      if (languageCode == 'ur') {
-        Get.updateLocale(const Locale('ur', 'PK'));
+    if (userId != null) {
+      // User exists, load language preference and navigate to HomeScreen
+      String? languageCode = prefs.getString('language');
+      if (languageCode != null) {
+        if (languageCode == 'ur') {
+          Get.updateLocale(const Locale('ur', 'PK'));
+        } else {
+          Get.updateLocale(const Locale('en', 'US'));
+        }
       } else {
+        // Default language to English if no preference is found
         Get.updateLocale(const Locale('en', 'US'));
       }
-    } else {
-      // Default language is English if no preference is found
-      Get.updateLocale(const Locale('en', 'US'));
-    }
 
-    // Navigate to HomeScreen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
-  } else {
-    // User does not exist, navigate to LoginScreen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Loginscreen()),
-    );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Loginscreen()),
+      );
+    }
   }
-}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +82,7 @@ Future<void> checkUserExists() async {
                     SizedBox(height: 20.h),
                   ],
                 )
-              : SizedBox.shrink(),
+              : SizedBox(),
         ),
       ),
     );

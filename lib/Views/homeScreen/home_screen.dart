@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Views/drawer/drawer_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_provider.dart';
@@ -25,16 +27,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+    RxBool isUrdu = false.obs; // Reactive state for language toggle.
+
   @override
   void initState() {
     super.initState();
     _loadLanguagePreference();
   }
 
-  // Load language preference when the app starts
   void _loadLanguagePreference() async {
-    final prefs = await SharedPreferences.getInstance(); // Get the instance asynchronously
+    final prefs = await SharedPreferences.getInstance();
     final languageCode = LocalStorageService(prefs).loadLanguage();
+    print('Language loaded: $languageCode');  // Debugging
+
     if (languageCode != null && languageCode == 'ur') {
       isUrdu.value = true;
       Get.updateLocale(const Locale('ur', 'PK'));
@@ -44,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+
   // final  _drawerKey = GlobalKey();
   List<String> images = [
     // MepaImage.home2,
@@ -52,8 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   // List<String> listText = ["identifyDisease".tr,"snapTips".tr];
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-            RxBool isUrdu = false.obs; // Reactive state for toggle.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +67,8 @@ appBar: AppBar(
       leading:  GestureDetector(
         onTap: (){    scaffoldKey.currentState?.openDrawer();},
         child: Icon(Icons.menu, color: greyColor)),
-        centerTitle: true,
-        title:  Text("pests".tr,style: TextStyle(color: blackColor,fontSize: 24.sp,
+        // centerTitle: true,
+        title:  Text("pests".tr,style: TextStyle(color: blackColor,fontSize: 16.sp,
                           fontWeight: FontWeight.w700,fontFamily: 'Roboto')),
       actions: [
         Container(child: 
@@ -94,27 +98,36 @@ appBar: AppBar(
     }
     return Colors.orange;
   }),
-                   onChanged: (value) async {
-                      isUrdu.value = value;
-                      // Save language preference
-                      String languageCode = isUrdu.value ? 'ur' : 'en';
-                          final prefs = await SharedPreferences.getInstance(); // Get the instance asynchronously
+                  onChanged: (value) async {
+  // Update the value of the language toggle
+  isUrdu.value = value;
 
-                      LocalStorageService(prefs)
-                          .saveLanguage(languageCode);
-                      // Update locale based on toggle value
-                      if (isUrdu.value) {
-                        Get.updateLocale(const Locale('ur', 'PK'));
-                      } else {
-                        Get.updateLocale(const Locale('en', 'US'));
-                      }
-                    },
-                  activeColor: Colors.green,
-                  inactiveThumbColor: Colors.grey,
-                ),
-            ]);
-    
-        })      
+  // Determine the language code based on the toggle value
+  String languageCode = isUrdu.value ? 'ur' : 'en';
+
+  // Get the SharedPreferences instance
+  final prefs = await SharedPreferences.getInstance();
+  LocalStorageService storageService = LocalStorageService(prefs);
+
+  // Save the language preference
+  await storageService.saveLanguage(languageCode);
+
+  // Log the saved language for debugging
+  print("Language saved: $languageCode");
+
+  // Update the app locale based on the selected language
+  if (isUrdu.value) {
+    Get.updateLocale(const Locale('ur', 'PK'));
+  } else {
+    Get.updateLocale(const Locale('en', 'US'));
+  }
+},
+                    activeColor: Colors.green,
+                    inactiveThumbColor: Colors.grey,
+                  ),
+              ]);
+      
+          })      
                           
     ),
     ]),
@@ -153,9 +166,7 @@ appBar: AppBar(
                               child: InkWell(
                                 onTap: () {
                                   if (index == 0) {
-                                    context
-                                        .read<HomeProvider>()
-                                        .pickedImage(context, 'disease');
+                                    context.read<HomeProvider>().pickedImage(context, 'disease');
                                   } else {
                                     Get.to(() => SnapTips());
                                   }
