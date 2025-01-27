@@ -34,14 +34,7 @@ class HomeProvider extends BaseViewModel {
             // Navigate to DiseaseInfoScreen
             log('Navigating to DiseaseInfoScreen with disease data: $diseaseData');
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => DiseaseInfoScreen(
-                  disease: diseaseData,
-                  pickedImagePath: file!.path
-                )
-              )
-            );
-          }
+              MaterialPageRoute(builder: (context) => DiseaseInfoScreen(disease: diseaseData,pickedImagePath: file!.path)));}
           else if(disease == 'crops'){
           showCustomDialog(context, diseaseData,file!);
           }

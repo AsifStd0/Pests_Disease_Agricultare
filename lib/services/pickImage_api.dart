@@ -3,11 +3,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:agricultare_weather_pests/Views/homeScreen/disease_model.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 Future<DiseaseModel> fetchDiseaseData(File imageFile) async {
   try {
-    log('Sending image to the API...');
     final request = http.MultipartRequest(
       'POST',
       Uri.parse('https://nlpgenius-cropdisease.hf.space'),
@@ -15,8 +13,8 @@ Future<DiseaseModel> fetchDiseaseData(File imageFile) async {
 
     
     request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
-        request.headers['Accept-Language'] = Get.locale?.languageCode ?? 'en'; // Default to English if null
-        log('Request headers: ${request.headers}',);
+        // request.headers['Accept-Language'] = Get.locale?.languageCode ?? 'en'; // Default to English if null
+        // log('Request headers: ${request.headers}',);
     final response = await request.send();
 
     if (response.statusCode == 200) {

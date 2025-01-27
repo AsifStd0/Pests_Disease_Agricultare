@@ -1,5 +1,6 @@
 class MepaImage {
   static const String url = "assets/images";
+  static const String plant = 'assets/plants';
 
   static const splashLogo = "$url/splash_logo.png";
   static const loginBack = "$url/login_back.png";
@@ -14,7 +15,11 @@ class MepaImage {
 
   
 
-
+static const String multiple = "$plant/multiple_species.jpg";
+// too close.PNG
+static const String too_close = "$plant/too close.PNG";
+// too_far.PNG
+static const String too_far = "$plant/too far.jpg";
 
 
   static const String url_1 = "assets";

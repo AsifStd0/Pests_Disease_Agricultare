@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:agricultare_weather_pests/Views/detectScreen/display_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/disease_model.dart';
+import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -60,30 +61,23 @@ class DiseaseInfoScreen extends StatelessWidget {
                   )
                 ),
                 SizedBox(height: 20.h),
-            if (disease.predictedClass.isNotEmpty) ...[
-                buildInfoRow('predictedDisease : '.tr, disease.predictedClass),
-                buildInfoRow('treatment : '.tr, disease.treatment),
-                buildInfoRow('confidence : '.tr, disease.confidence),
-                buildInfoRow('precaution : '.tr, disease.precautions),
+            if (disease.predictedClass.isNotEmpty) ...<Widget>[
+                buildInfoRow('predictedDisease'.tr, "${ disease.predictedClass}"),
+                buildInfoRow('treatment'.tr, "${ disease.treatment}"),
+                buildInfoRow('confidence'.tr, "${ disease.confidence}"),
+                buildInfoRow('precaution'.tr, "${ disease.precautions}")
               ] else
                  Center(
                   child: Text(
                     "noData".tr,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+                      fontWeight: FontWeight.bold)))]))),
         // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
         floatingActionButton:   Align(
           alignment: Alignment.bottomCenter,
           child: KlButton(
-             onPressed: () => Navigator.pop(context),
+             onPressed: () => Get.offAll(()=>HomeScreen()),
            style: KlButtonStyle.camera,
            label: 'done'.tr,
            buttonColor: mainColor,
@@ -103,7 +97,7 @@ Widget buildInfoRow(String label, String info) {
         style: TextStyle(fontSize: 17.sp, color: Colors.black), // Default text style
         children: [
           TextSpan(
-            text: label,
+            text: "$label : ",
             style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold,color: mainColor), // Label style
           ),
           TextSpan(

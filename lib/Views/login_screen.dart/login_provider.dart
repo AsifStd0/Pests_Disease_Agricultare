@@ -21,6 +21,7 @@ Future<void> login(BuildContext context) async {
   // Set the state to busy to indicate a loading state
   // !*********
   setState(ViewState.busy);
+  
 
   final String email = emailController.text.trim();
   final String password = passwordController.text.trim();
@@ -96,7 +97,7 @@ Future<void> login(BuildContext context) async {
 
 // ! **********
       // Navigate to the HomeScreen
-      Get.off(() => HomeScreen());
+      Get.offAll(() => HomeScreen());
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
@@ -124,6 +125,14 @@ Future<void> login(BuildContext context) async {
   }
 }
 
+
+@override
+void dispose() {
+  emailController.dispose();
+  passwordController.dispose();
+  
+  super.dispose();
+}
   // Future<void> login(BuildContext context) async {
   //   setState(ViewState.busy);
 

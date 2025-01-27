@@ -88,7 +88,7 @@ class SignupProvider extends BaseViewModel {
       //   log('Language preference already exists: $currentLanguage');
       // }
         // Navigate to the next screen (HomeScreen)
-        Get.to(() => HomeScreen());
+        Get.offAll(() => HomeScreen());
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
@@ -109,5 +109,15 @@ class SignupProvider extends BaseViewModel {
       setState(ViewState.idle);
       notifyListeners();
     }
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    
+    super.dispose();
   }
 }

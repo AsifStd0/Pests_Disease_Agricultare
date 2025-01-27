@@ -180,58 +180,7 @@ appBar: AppBar(
                                         height: 80.h,
                                         width: 160.w,
                                       ),
-                                      CustomText(text: listText[index])
-                                    ]
-                                  )
-                                )
-                              )
-                            );
-                          }
-                        );
-                      })
-                    )
-                  ]
-                )
-              )
-            // )
-          );
-        })
-      );
-  }
-}
-                        // Container(
-                        //     height: 140.h,
-                        //     decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(20.r)),
-                        //     child: ListView.builder(
-                        //         shrinkWrap: false,
-                        //         physics: BouncingScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemCount: images.length,
-                        //         itemBuilder: (context, index) {
-                        //           return Padding(
-                        //               padding: EdgeInsets.only(left: 5.w),
-                        //               child: InkWell(
-                        //                   onTap: () {
-                        //                     // provider.pickedImage(context);
-                        //                     // if(index ==0){
-                                              
-                        //                     //   provider.pickedImage(context,'crops');
-                        //                     // }
-                        //                     // else
-                        //                      if(index == 0){
-                        //                                   context.read<HomeProvider>().pickedImage(context, 'disease');
-                        //                       // provider.pickedImage(context,'disease');
-                        //                     }
-                        //                     else{
-                        //                     Get.to(() => SnapTips());
-                        //                     }
-                        //                   },
-                        //                   child: Card(
-                        //                       elevation: 5,
-                        //                       child: Column(children: [
-                        //                         Image.asset(
-                        //                           images[index],
-                        //                           height: 80.h,
-                        //                           width: 160.w),
-                        //                         CustomText(text: listText[index])]))));}))]))));})));}}
+                                      CustomText(text: listText[index])]
+                                  ))));
+                          });}))])));}));}}
+                       
