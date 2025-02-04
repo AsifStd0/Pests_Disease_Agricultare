@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
               home:  Splashscreen(),
-                     locale: const Locale('en', 'US'),
-      translations: GetxTranslations(),
-                fallbackLocale: const Locale('en', 'US'),
+              locale: const Locale('en', 'US'),
+              translations: GetxTranslations(),
+              fallbackLocale: const Locale('en', 'US'),
               );
 
         }));
