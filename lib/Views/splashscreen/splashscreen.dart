@@ -2,8 +2,10 @@
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
+import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Splashscreen extends StatefulWidget {
@@ -15,31 +17,36 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-  bool isLoading = true; 
-@override
-void initState() {
-  super.initState();
-  checkUserExists();
-}
+   bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    setLanguageAndCheckUser();
+  }
+
+  Future<void> setLanguageAndCheckUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? languageCode = prefs.getString('language');
+
+    // Set language immediately before UI builds
+    if (languageCode != null) {
+      Get.updateLocale(Locale(languageCode, languageCode == 'ur' ? 'PK' : 'US'));
+    } else {
+      Get.updateLocale(const Locale('en', 'US')); // Default to English
+    }
+
+    // Now check user existence and navigate
+    checkUserExists();
+  }
+
   Future<void> checkUserExists() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('user_id');
 
-    await Future.delayed(Duration(seconds: 2));
-    if (userId != null) {
-      // User exists, load language preference and navigate to HomeScreen
-      String? languageCode = prefs.getString('language');
-      if (languageCode != null) {
-        if (languageCode == 'ur') {
-          Get.updateLocale(const Locale('ur', 'PK'));
-        } else {
-          Get.updateLocale(const Locale('en', 'US'));
-        }
-      } else {
-        // Default language to English if no preference is found
-        Get.updateLocale(const Locale('en', 'US'));
-      }
+    await Future.delayed(const Duration(milliseconds: 1500));
 
+    if (userId != null) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -53,32 +60,49 @@ void initState() {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: whiteColor,
-        body: isLoading
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: whiteColor,
+      body: isLoading
+          ? Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    MepaImage.splashLogo,
-                    fit: BoxFit.fitHeight,
+                  Padding(
+                    padding:  EdgeInsets.only(top: 80.h,bottom: 40.h),
+                    child: CustomText(
+                      text: 'Welcome'.tr,
+                      fontsize: 36.sp,
+                      fontweight: FontWeight.bold,
+                      color: mainColor,
                     ),
-                  // SizedBox(height: 20.h),
-        //                    CustomText(
-        //   text: "splash_head".tr,
-        //   fontsize: 24.sp,
-        //   fontweight: FontWeight.bold,
-        //   maxlines: 2, // Display only one line
-        // ),
-                  // SizedBox(height: 20.h),
+                  ),
+                  Image.asset(
+                    MepaImage.leaf_search,
+                    height: 180.h,
+                    width: 230.w,
+                    ),
+    
+                    Padding(
+                      padding:  EdgeInsets.only(top: 40.h,bottom: 60.h),
+                      child: CustomText(
+                        text: 'pestdisease'.tr,
+                        fontsize: 28.sp,
+                        fontweight: FontWeight.bold,
+                        color: mainColor,
+                      ),
+                    ),
+                    CustomText(
+                        text: 'detectcropus'.tr,
+                        fontsize: 17.sp,
+                        fontweight: FontWeight.bold,
+                        color: mainColor.withOpacity(0.7),
+                      ),
                 ],
-              )
-            : SizedBox(),
-      ),
+              ),
+          )
+          : SizedBox(),
     );
   }
 }

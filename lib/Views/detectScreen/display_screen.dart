@@ -22,9 +22,7 @@ class FullScreenImageViewer extends StatelessWidget {
                   backgroundDecoration: BoxDecoration(color: Colors.black),
                 )
               : Icon(
-                  Icons.error,
-                  color: Colors.white,
-                  size: 100,
+                  Icons.error,color: Colors.white,size: 100,
                 ),
         ),
       ),

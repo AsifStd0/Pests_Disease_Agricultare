@@ -1,3 +1,4 @@
+import 'package:agricultare_weather_pests/AddData/add_data_provider.dart';
 import 'package:agricultare_weather_pests/Views/EditProfile/editprofile_provider.dart';
 import 'package:agricultare_weather_pests/Views/add_crops/added_provider.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_provider.dart';
@@ -15,6 +16,7 @@ ChangeNotifierProvider(create: (_)=> AddedProvider()),
         ChangeNotifierProvider(create: (_)=>HomeProvider()),
         ChangeNotifierProvider(create: (_)=>EditprofileProvider()),
 
+        ChangeNotifierProvider(create: (_)=>AddDataProvider()),
 
         
 ];

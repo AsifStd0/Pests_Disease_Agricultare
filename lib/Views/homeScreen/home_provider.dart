@@ -15,8 +15,7 @@ class HomeProvider extends BaseViewModel {
   File? file;
   final ImagePicker picker = ImagePicker();
 
-  Future<void> getImage(
-      ImageSource source, BuildContext context, String disease) async {
+  Future<void> getImage(ImageSource source, BuildContext context, String disease) async {
     try {
       final pickedFile = await picker.pickImage(source: source);
       log('Image Picked: $pickedFile');
@@ -49,7 +48,6 @@ class HomeProvider extends BaseViewModel {
     }
     notifyListeners();
   }
-
 
 void pickedImage(BuildContext context,String disease) {
 showModalBottomSheet(

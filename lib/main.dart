@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
+    sharedPrefs = await SharedPreferences.getInstance();
+
   runApp(const MyApp());
 }
+late SharedPreferences sharedPrefs;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -26,9 +31,6 @@ class MyApp extends StatelessWidget {
               locale: const Locale('en', 'US'),
               translations: GetxTranslations(),
               fallbackLocale: const Locale('en', 'US'),
-              );
-
-        }));
-  }
-}
+              );}));
+  }}
 

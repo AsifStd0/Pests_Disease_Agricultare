@@ -43,7 +43,9 @@ showCustomDialog(BuildContext context, DiseaseModel diseaseData, File file) {
                                 SizedBox(width: 10),
                                 Flexible(
                                     child: Text(
-                                        'Predicted Disease : ${diseaseData.predictedClass}\n\n Treatment : ${diseaseData.treatment}\n\n Confidence : ${diseaseData.confidence}\n\n Precaution : ${diseaseData.precautions}',
+                                        // 'Predicted Disease : ${diseaseData.predictedClass}\n\n Treatment : ${diseaseData.treatment}\n\n Confidence : ${diseaseData.confidence}\n\n Precaution : ${diseaseData.precautions}',
+                                        'Predicted Disease : ${diseaseData.predictedClass}\n\n Treatment : ${diseaseData.treatment}\n\n Precaution : ${diseaseData.precautions}',
+
                                         softWrap: true,
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.white)))

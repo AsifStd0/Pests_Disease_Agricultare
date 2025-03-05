@@ -8,6 +8,9 @@ class MepaImage {
   static const noInterNetConnection = "$url/nointernet.jpeg";
   static const select_img = "$url/select_img.png";
   static const leaf  = "$url/leaf.png";
+  static const leaf_search  = "$url/leaf_search.png";
+
+  // leaf_search.png
 
   
   
@@ -20,10 +23,8 @@ static const String multiple = "$plant/multiple_species.jpg";
 static const String too_close = "$plant/too close.PNG";
 // too_far.PNG
 static const String too_far = "$plant/too far.jpg";
-
-
-  static const String url_1 = "assets";
-  static const String iconUrl = "assets/icons";
+static const String url_1 = "assets";
+static const String iconUrl = "asset  s/icons";
 static const String profile_image = "$url/profile_image.png";
 
 

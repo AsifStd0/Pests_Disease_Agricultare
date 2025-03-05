@@ -64,7 +64,7 @@ class DiseaseInfoScreen extends StatelessWidget {
             if (disease.predictedClass.isNotEmpty) ...<Widget>[
                 buildInfoRow('predictedDisease'.tr, "${ disease.predictedClass}"),
                 buildInfoRow('treatment'.tr, "${ disease.treatment}"),
-                buildInfoRow('confidence'.tr, "${ disease.confidence}"),
+                // buildInfoRow('confidence'.tr, "${ disease.confidence}"),
                 buildInfoRow('precaution'.tr, "${ disease.precautions}")
               ] else
                  Center(

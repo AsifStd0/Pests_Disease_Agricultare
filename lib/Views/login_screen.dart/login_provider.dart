@@ -34,7 +34,8 @@ Future<void> login(BuildContext context) async {
   try {
     log('Calling');
     final response = await http.post(
-      Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/login'),
+      Uri.parse('http://ai-pest.kpitb.online/api/auth/login'),
+        // 'https://mongoapi-440911.uw.r.appspot.com/v1/auth/login'),
       headers: {"Content-Type": "application/json"},
       body: json.encode(loginData),
     );

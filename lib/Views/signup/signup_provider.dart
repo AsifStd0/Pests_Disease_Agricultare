@@ -33,7 +33,9 @@ class SignupProvider extends BaseViewModel {
     try {
       // API call
       final response = await http.post(
-        Uri.parse('https://mongoapi-440911.uw.r.appspot.com/v1/auth/register'),
+        Uri.parse('http://ai-pest.kpitb.online/api/auth/register'),
+          
+          // 'https://mongoapi-440911.uw.r.appspot.com/v1/auth/register'),
         headers: {"Content-Type": "application/json"},
         body: json.encode(userData),
       );
