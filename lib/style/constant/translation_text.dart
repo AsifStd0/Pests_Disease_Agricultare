@@ -7,10 +7,15 @@ class GetxTranslations extends Translations {
 
 
 
-          'Welcome' : 'Welcome','snap_tips_urdu': 'Snap Tips','identifyDiseaseHome': 'Identify Disease','language_toggle': 'Eng','splash_head': 'WEATHER & PEST DISEASE CONTROL APP','pests': 'Crops Disease Detection','pestdisease' : 'Pest\nDetection','detectcropus' :"DETECT THE CROP\nWITH US!!",'pic_text':  'Please upload your picture through\nthe camera or gallery.','pestsDisease': 'PEST DISEASE\nDETECTION','letsStart': "Let's get started!",'or': 'Or','enterlastName': 'Enter Last Name','enterPassword': 'Enter password','name': 'Name','firstname': 'First Name','lastname': 'Last Name','email': 'Email','sendemail': 'Send Email','password': 'Password','verificaionCode': 'Verification Code','newPassword': 'New password','confirmPassword': 'Confirm Password','reenterPassword': 'Re-Enter Password','location': 'Location','enterLocation': 'Enter Current Weather ','finish': 'Finish','edit': 'Edit','done': 'Done','passidentical': 'Passwords must be identical','alreadyAccount': 'Already have an account?','verificaionCodeText':
+          'Welcome' : 'Welcome','snap_tips_urdu': 'Snap Tips','identifyDiseaseHome': 'Identify Disease','language_toggle': 'Eng','splash_head': 'WEATHER & PEST DISEASE CONTROL APP','pests': 'Crops Disease Detection','pestdisease' : 'Pest\nDetection',
+          // 'detectcropus' :"DETECT THE CROP\nWITH US!!",
+          "detectcropus": "AI-Powered Quick and Easy\nPest Detection for Farmers",
+          
+          
+          'pic_text':  'Please upload your picture through\nthe camera or gallery.','pestsDisease': 'PEST DISEASE\nDETECTION','letsStart': "Let's get started!",'or': 'Or','enterlastName': 'Enter Last Name','enterPassword': 'Enter password','name': 'Name','firstname': 'First Name','lastname': 'Last Name','email': 'Email','sendemail': 'Send Email','password': 'Password','verificaionCode': 'Verification Code','newPassword': 'New password','confirmPassword': 'Confirm Password','reenterPassword': 'Re-Enter Password','location': 'Location','enterLocation': 'Enter Current Weather ','finish': 'Finish','edit': 'Edit','done': 'Done','passidentical': 'Passwords must be identical','alreadyAccount': 'Already have an account?','verificaionCodeText':
               'We have sent the verification code to your email address','signUp': 'Sign up','signin': 'Sign In',
           'login': 'LOGIN','forgotPassword': 'Forgot Password?','loginSmall': 'Login','forgot': 'Forgot Password?','forgotPass': 'Forgot Password','welcome': 'WELCOME','continueTxt': 'Continue','skip': 'Skip','confirm': 'Confirm','congratulation':
-              'Congratulations! You have been successfully authenticated','identifyDisease': 'Identify Disease','snapTips': 'Snap Tips','noImageSelected': 'No image selected.','failedToPickImage': 'Failed to pick image.','gallery': 'Gallery','camera': 'Camera','tooClose': 'Too Close','multipleSpecies': 'Multiple species','tooFar': 'Too far','home': 'Home','aboutUs': 'About us','editProfile': 'Edit Profile','history': 'History','education': 'Education','logout': 'Logout','privacy': 'Privacy','privacyPolicy': 'Privacy Policy','contactUs': 'Contact Us','phone': 'Phone','enterPhone': 'Enter Phone','enterOnlyNumber': 'Enter Only Number','sendMessage': 'Send Message','enterEmail': 'Enter your Email','enterUsername': 'Enter Username',
+              'Congratulations! You have been successfully authenticated','identifyDisease': 'Identify Disease','snapTips': 'Snap Tips','noImageSelected': 'No image selected.','failedToPickImage': 'Failed to pick image.','gallery': 'Gallery','camera': 'Camera','tooClose': 'Too Close','multipleSpecies': 'Multiple Species','tooFar': 'Too Far','home': 'Home','aboutUs': 'About us','editProfile': 'Edit Profile','history': 'History','education': 'Education','logout': 'Logout','privacy': 'Privacy','privacyPolicy': 'Privacy Policy','contactUs': 'Contact Us','phone': 'Phone','enterPhone': 'Enter Phone','enterOnlyNumber': 'Enter Only Number','sendMessage': 'Send Message','enterEmail': 'Enter your Email','enterUsername': 'Enter Username',
           'selectDate': 'Select Date','selectOption': 'Select Option','search': 'Search','enterText': 'Enter Text','logout_confirmation': 'Are you sure you want to logout?','cancel': 'Cancel',"Configuration": "Configuration","dontAccount": "Dont’t have an account?","Success": "Success","loginsuccessful": "Login Successful","aboutUsData":
               """ Welcome to Pest Disease Detection, your reliable partner in modern agricultural solutions. Our app is designed to help farmers and gardeners identify pests and diseases in crops effortlessly. Using advanced AI technology, we aim to empower you with quick and accurate detection, ensuring better crop health and productivity. At Pest Disease Detection, we understand the challenges faced by farmers. That’s why we provide a user-friendly platform with localized language support to make it accessible to everyone. With features like snap-and-detect, disease prevention tips, and expert advice, we are committed to revolutionizing agricultural practices for a sustainable future. Together, let's safeguard crops and secure livelihoods.""",
           "educationDummy": """
@@ -25,17 +30,22 @@ It grows well in warm climates and requires minimal maintenance.""",
           'enterValidEmail' : "Please enter your email address","invalidEmail" : "Invalid email address",
           'enterValidPassword' : "Enter your password","invalidPassword" : "Password must be more than 5 characters",
           
-          'diseaseName': 'Disease Name','enterDiseaseName': 'Enter Disease Name',},
+          'diseaseName': 'Disease Name','enterDiseaseName': 'Enter Disease Name',
+          "uploaddata":'Upload Data',
+            "clearImage" :"Take a clear and bright\nphoto of one plant.",
+          },
         'ur_PK': {
-
-
-
-
+          "clearImage" :"ایک پودے کی واضح اور روشن تصویر لیں۔",
+          'uploaddata': 'ڈیٹا اپ لوڈ کریں',
           'diseaseName': 'بیماری کا نام','enterDiseaseName': 'بیماری کا نام درج کریں','enterValidEmail' : "براہ کرم اپنا ای میل ایڈریس درج کریں","invalidEmail" : "غلط ای میل ایڈریس",'enterValidPassword' : "اپنا پاس ورڈ درج کریں","invalidPassword" : "پاس ورڈ پانچ حروف سے زیادہ ہونا چاہئے","enterOnlyNumber": "صرف نمبر درج کریں",'enterName': 'نام درج کریں',
           "enterdiseaseDescription": 'بیماری کی تفصیلات درج کریں','enterreamedies': 'علاج درج کریں','enterWeather':     'موسم','diseaseDescription' : 'بیماری کی تفصیلات','reamedies' : 'علاج'
           ,'Weather' : 'موسم',
           
-          'image': 'تصویر','detectcropus' : "!!ہماری مدد سے فصل کی شناخت کریں",'pestdisease' :"کیڑے مکوڑوں کا پتہ لگانا",'Welcome' : "خوش آمدید","createaccount": "اکاؤنٹ بنائیں",'hoyaCarnosaTricolor': 'ہویا کارنوسا ٹرائیکلر','sunflower': 'سورج مکھی','predictedDisease : ': 'پیش گوئی شدہ بیماری','treatment : ': 'علاج','confidence : ': 'اعتماد','precaution : ': 'احتیاط',"noData": " کوئی ڈیٹا نہیں ملا","crops": "فصلیں","aloeVera": "ایلو ویرا","maize": "مکئی","rice": "چاول","cotton": "کپاس","sugarCane": 'گنا',"jowar": "جو",'enterlastName': 'آخری نام درج کریں',
+          'image': 'تصویر',
+           "detectcropus": "کسانوں کے لیے اے آئی سے چلنے والی \nتیز اور آسان کیڑوں کی شناخت",
+          // 'detectcropus' : "!!ہماری مدد سے فصل کی شناخت کریں",
+          
+          'pestdisease' :"کیڑے مکوڑوں کا پتہ لگانا",'Welcome' : "خوش آمدید","createaccount": "اکاؤنٹ بنائیں",'hoyaCarnosaTricolor': 'ہویا کارنوسا ٹرائیکلر','sunflower': 'سورج مکھی','predictedDisease : ': 'پیش گوئی شدہ بیماری','treatment : ': 'علاج','confidence : ': 'اعتماد','precaution : ': 'احتیاط',"noData": " کوئی ڈیٹا نہیں ملا","crops": "فصلیں","aloeVera": "ایلو ویرا","maize": "مکئی","rice": "چاول","cotton": "کپاس","sugarCane": 'گنا',"jowar": "جو",'enterlastName': 'آخری نام درج کریں',
           "educationDummy": """
 ایلو ویرا ایک طبی پودا ہے جو اپنی سکون بخش اور شفائی خصوصیات کے لیے مشہور ہے۔ یہ جلد کی دیکھ بھال، کاسمیٹکس، اور صحت کی مصنوعات میں بڑے پیمانے پر استعمال ہوتا ہے۔
 ایلو ویرا کے پتوں کے اندر کا جیل وٹامنز، منرلز، اور اینٹی آکسیڈنٹس سے بھرپور ہوتا ہے۔

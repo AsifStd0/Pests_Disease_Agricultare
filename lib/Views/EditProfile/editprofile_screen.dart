@@ -1,10 +1,3 @@
-import 'package:agricultare_weather_pests/Model/enum.dart';
-import 'package:agricultare_weather_pests/Views/EditProfile/editprofile_provider.dart';
-import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
-import 'package:agricultare_weather_pests/style/constant/testfield.dart';
-import 'package:agricultare_weather_pests/style/constant/texts.dart';
-import 'package:agricultare_weather_pests/style/constant/validator.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

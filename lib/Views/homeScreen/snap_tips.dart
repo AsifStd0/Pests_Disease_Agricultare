@@ -23,21 +23,37 @@ class _SnapTipsState extends State<SnapTips> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 100.h, bottom: 30.h),
+                padding: EdgeInsets.only(top: 60.h, bottom: 20.h),
                 child: CustomText(
                   text: "snapTips".tr,
                   fontsize: 28.sp,
                   fontFamily: 'Roboto',
                   fontweight: FontWeight.w600)),
-              Container(
-                height: 120,
-                width: 120,
-                decoration: BoxDecoration(
-                    color: greyColor,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(MepaImage.leaf),
-                    ))),
+Container(
+  height: 160,
+  width: 160,
+  decoration: BoxDecoration(
+    color: greyColor, // Background color
+    shape: BoxShape.circle, // Ensures circular background
+  ),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(80), // Ensures the image is clipped in a circle
+    child: Image.asset(
+      MepaImage.leaf,
+      width: 120, // Makes sure the image fills the space properly
+      height: 120,
+      fit: BoxFit.contain, // Makes sure the image fills the space properly
+    ),
+  ),
+)
+,
+Padding(
+  padding:  EdgeInsets.only(top: 5.h,right: 25.w,left: 30.w),
+  child: CustomText(text: 'clearImage'.tr,textAlign: TextAlign.center,maxlines: 2,fontsize: 18.sp,),
+),
+
+
+
               Spacer(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),

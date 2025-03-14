@@ -6,9 +6,10 @@ import 'package:agricultare_weather_pests/Views/homeScreen/snap_tips.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
+// import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -139,12 +140,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.w,
-                                right: 10.h,
-                                top: 30.h,
-                                bottom: 60.h),
-                            child: Image.asset(MepaImage.home1)),
+                          padding: EdgeInsets.only(
+                              left: 5.w, right: 5.h, top: 15.h, bottom: 15.h),
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: 200.h, // Adjust height as needed
+                              autoPlay: true, // Enables auto sliding
+                              enlargeCenterPage: true,
+                              viewportFraction:0.9,
+                                  ),
+                            items: [
+                              MepaImage.crop1,
+                              MepaImage.crop2,
+                              MepaImage.crop3, // Add more images as needed
+                            ].map((imagePath) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.w),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.r),
+                                      image: DecorationImage(
+                                        image: AssetImage(imagePath),
+                                        fit: BoxFit.cover)));});}).toList())),
+
                         Container(
                             height: 140.h,
                             decoration: BoxDecoration(
@@ -201,36 +222,45 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ]))));
                                   });
                             })),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 10.w,
-                            right: 10.h,
-                            top: 10.h,
-                          ),
-                          child: InkWell(
-                            onTap: () {
-                              Get.to(() => AddDataUser());
-                            },
-                            child: Container(
-                              height: 140.h,
-                              child: Card(
-                                  elevation: 5,
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          MepaImage.home3,
-                                          height: 80.h,
-                                          width: 160.w,
-                                        ),
-                                        CustomText(text: "Add Data")
-                                      ])),
-                            ),
-                          ),
-                        )
+
+              FutureBuilder(
+  future: SharedPreferences.getInstance(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return CircularProgressIndicator(); // Show loader while checking login
+    }
+
+    // SharedPreferences prefs = snapshot.data as SharedPreferences;
+    // String? userId = prefs.getString('user_id');
+
+    return Padding(
+      padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.w),
+      child: InkWell(
+        onTap: () {
+          Get.to(() => AddDataUser());
+        },
+        child: Container(
+          height: 140.h,
+          child: Card(
+            elevation: 5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  MepaImage.home3,
+                  height: 80.h,
+                  width: 160.w,
+                ),
+                CustomText(text: "uploaddata".tr),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  },
+)
                       ])));
         }));
   }

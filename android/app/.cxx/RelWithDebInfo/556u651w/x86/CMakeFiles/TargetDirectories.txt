@@ -1,0 +1,2 @@
+D:/Agricultare Pest and Disease/pests_disease_agricultare/android/app/.cxx/RelWithDebInfo/556u651w/x86/CMakeFiles/edit_cache.dir
+D:/Agricultare Pest and Disease/pests_disease_agricultare/android/app/.cxx/RelWithDebInfo/556u651w/x86/CMakeFiles/rebuild_cache.dir

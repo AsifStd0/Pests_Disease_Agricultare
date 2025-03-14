@@ -21,75 +21,63 @@ class SignupProvider extends BaseViewModel {
   Future<void> signUp(BuildContext context) async {
     setState(ViewState.busy);
 
-    // Prepare user data
     final Map<String, String> userData = {
       "first_name": firstNameController.text,
       "last_name": lastNameController.text,
       "email": emailController.text,
       "password": passwordController.text,
     };
-    log("${userData}");
 
     try {
-      // API call
       final response = await http.post(
-        Uri.parse('http://ai-pest.kpitb.online/api/auth/register'),
-          
-          // 'https://mongoapi-440911.uw.r.appspot.com/v1/auth/register'),
+        Uri.parse('https://testproject.famzhost.com/api/register'),
         headers: {"Content-Type": "application/json"},
         body: json.encode(userData),
       );
 
-      // Handle API response
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
+print('Success ${response.body}');
         final responseData = json.decode(response.body);
 
-        // Extract the user ID from the response
-        final String userId = responseData['data'][0]['_id'];
-        log('User ID: $userId');
-        
-        // Populate the UserDataModel
-        userDataModel = UserDataModel.fromJson(responseData['data'][0]);
+        // Extract user details from API response
+        final userJson = responseData['user'];
+        final token = responseData['token'];
+        print('User: $userJson   token: ------ $token');
+
+        // Populate UserDataModel
+userDataModel = UserDataModel(
+  id: userJson['id'] is int ? userJson['id'] : int.tryParse(userJson['id'].toString()),
+  username: userJson['username'],
+  email: userJson['email'],
+  password: userJson['password'],
+);
+
+        log('User data: $userDataModel');
 
         // Save user data locally (SharedPreferences)
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('user_id', userId);  // Save user ID
-        prefs.setString('user_data', json.encode(userDataModel.toJson()));  // Save full user data
+        prefs.setString('user_id', userJson['id'].toString());
+        prefs.setString('user_token', token);
+        prefs.setString('user_data', json.encode(userDataModel.toJson()));
+        log('User data saved to SharedPreferences');
 
-            LocalStorageService storageService = LocalStorageService(prefs);
+        LocalStorageService storageService = LocalStorageService(prefs);
 
-  // Check and apply language preference
-      String? currentLanguage = storageService.loadLanguage();
+        // Check and apply language preference
+        String? currentLanguage = storageService.loadLanguage();
+        log('11111111');
+        if (currentLanguage == null) {
+          String languageCode = 'en';
+          await storageService.saveLanguage(languageCode);
+          log('Setting default language: $languageCode');
+          currentLanguage = languageCode;
+        } else {
+          log('Language preference: $currentLanguage');
+        }
+log('22222222222');
+        Get.updateLocale(Locale(currentLanguage));
 
-      if (currentLanguage == null) {
-        String languageCode = 'en'; // Default to English
-        await storageService.saveLanguage(languageCode);
-        log('Language preference not found. Setting default to: $languageCode');
-        currentLanguage = languageCode;
-      } else {
-        log('Language preference already exists: $currentLanguage');
-      }
-
-      // Apply the language preference
-      if (currentLanguage == 'ur') {
-        log('Setting language to Urdu');
-        Get.updateLocale(Locale('ur'));
-      } else {
-        log('Setting language to English');
-        Get.updateLocale(Locale('en'));
-      }
-
-  // // Check if a language preference is already saved
-      // String? currentLanguage = prefs.getString('language');
-      // if (currentLanguage == null) {
-      //   // Set default language preference if not already set
-      //   String languageCode = 'en'; // Or dynamically detect language
-      //   prefs.setString('language', languageCode);
-      //   log('Language preference set to: $languageCode');
-      // } else {
-      //   log('Language preference already exists: $currentLanguage');
-      // }
-        // Navigate to the next screen (HomeScreen)
+        // Navigate to HomeScreen
         Get.offAll(() => HomeScreen());
 
         // Show success message
@@ -103,7 +91,6 @@ class SignupProvider extends BaseViewModel {
         );
       }
     } catch (e) {
-      // Handle any exceptions
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: $e')),
       );
@@ -112,14 +99,13 @@ class SignupProvider extends BaseViewModel {
       notifyListeners();
     }
   }
+
   @override
   void dispose() {
-    // TODO: implement dispose
     emailController.dispose();
     passwordController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
-    
     super.dispose();
   }
 }

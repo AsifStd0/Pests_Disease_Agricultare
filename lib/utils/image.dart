@@ -11,7 +11,10 @@ class MepaImage {
   static const leaf_search  = "$url/leaf_search.png";
 
   // leaf_search.png
-
+// ! ************ Carosole Slider
+static const crop1 = "$url/crop1.png";
+static const crop2 = "$url/crop2.png";
+static const crop3 = "$url/crop3.png";
   
   
   static const round_circle = "$url/round_circle.png"; 

@@ -7,7 +7,6 @@ import 'package:agricultare_weather_pests/style/CustomText/customtext_navigation
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
 import 'package:agricultare_weather_pests/style/constant/testfield.dart';
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/style/constant/validator.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
@@ -94,6 +93,7 @@ class _SignupState extends State<Signup> {
                           padding: EdgeInsets.only(top: 40.h, bottom: 25.h),
                           child: KlButton(
                               onPressed: () {
+                                print("pressed");
                               if(formKey.currentState!.validate()){
                                 provider.signUp(context);
                               }

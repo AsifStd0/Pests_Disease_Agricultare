@@ -42,7 +42,22 @@ showLogout(BuildContext context,LoginProvider provider) {
             ),
             onPressed: () async {
                             Navigator.of(context).pop(); 
-              provider.logoutApi(context);
+             SharedPreferences prefs = await SharedPreferences.getInstance();
+                  // await prefs.clear(); // Clear all user data from local storage
+//  prefs.setString('user_data', json.encode(responseData));
+await prefs.remove('user_data');
+// await prefs.remove('user_id');
+await prefs.remove('user_email');
+// await prefs.remove('user_first_name');
+// await prefs.remove('user_last_name');
+await prefs.remove('user_role');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('User Successfull Logout'),
+                    ),
+                  );
+                            Get.offAll(() => Loginscreen());
+              // provider.logoutApi(context);
            
             },
           ),

@@ -2,25 +2,20 @@ import 'dart:developer';
 
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Views/AboutUs/aboutUs.dart';
-import 'package:agricultare_weather_pests/Views/ContactUs/contact_us.dart';
-import 'package:agricultare_weather_pests/Views/EditProfile/editprofile_screen.dart';
 import 'package:agricultare_weather_pests/Views/dialogs/custom_dialog.dart';
 import 'package:agricultare_weather_pests/Views/education/education_screen.dart';
 import 'package:agricultare_weather_pests/Views/history/history_main.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
-import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../login_screen.dart/login_provider.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 class MenuWidget extends StatelessWidget {
   final List<IconData> allIcons = [
     Icons.home,
@@ -40,20 +35,35 @@ class MenuWidget extends StatelessWidget {
     "logout".tr,
   ];
 
+
   Future<List<Map<String, dynamic>>> getFilteredMenuData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('user_id');
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? userId = prefs.getString('user_id');
 
     List<Map<String, dynamic>> menuList = [];
     for (int i = 0; i < allMenuData.length; i++) {
-      if (userId == null && (i == 2 || i == 4 )) {
+      // if (userId == null && (i == 2 || i == 4 )) {
         // Skip Edit Profile, History, and Logout if ID is null
-        continue;
-      }
+      //   continue;
+      // }
       menuList.add({'title': allMenuData[i], 'icon': allIcons[i]});
     }
     return menuList;
   }
+  // Future<List<Map<String, dynamic>>> getFilteredMenuData() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? userId = prefs.getString('user_id');
+
+  //   List<Map<String, dynamic>> menuList = [];
+  //   for (int i = 0; i < allMenuData.length; i++) {
+  //     if (userId == null && (i == 2 || i == 4 )) {
+  //       // Skip Edit Profile, History, and Logout if ID is null
+  //       continue;
+  //     }
+  //     menuList.add({'title': allMenuData[i], 'icon': allIcons[i]});
+  //   }
+  //   return menuList;
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/utils/string_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +22,23 @@ class LocalStorageService {
   final SharedPreferences _prefs;
 
   LocalStorageService(this._prefs);
+
+  // ! *****
+
+   // Save User Locally
+  Future<void> saveUser(Map<String, dynamic> user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('user', json.encode(user));
+  }
+
+  // Get User Locally
+  Future<UserDataModel> getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String user = prefs.getString('user') ?? '';
+    return UserDataModel.fromJson(json.decode(user));
+  }
+
+  // ! **************
 
   Future<void> saveCrops(List<SelectCropsData> listCrops) async {
 

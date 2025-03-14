@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
@@ -35,15 +37,14 @@ class _SplashscreenState extends State<Splashscreen> {
     } else {
       Get.updateLocale(const Locale('en', 'US')); // Default to English
     }
-
-    // Now check user existence and navigate
     checkUserExists();
   }
 
   Future<void> checkUserExists() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('user_id');
-
+    
+log('userId $userId');
     await Future.delayed(const Duration(milliseconds: 1500));
 
     if (userId != null) {
@@ -95,7 +96,7 @@ class _SplashscreenState extends State<Splashscreen> {
                     ),
                     CustomText(
                         text: 'detectcropus'.tr,
-                        fontsize: 17.sp,
+                        fontsize: 19.sp,
                         fontweight: FontWeight.bold,
                         color: mainColor.withOpacity(0.7),
                       ),

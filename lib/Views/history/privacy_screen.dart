@@ -1,4 +1,3 @@
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

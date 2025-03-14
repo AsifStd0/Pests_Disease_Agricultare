@@ -1,5 +1,4 @@
 import 'package:agricultare_weather_pests/style/colors.dart';
-import 'package:agricultare_weather_pests/style/constant/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
