@@ -43,14 +43,9 @@ showLogout(BuildContext context,LoginProvider provider) {
             onPressed: () async {
                             Navigator.of(context).pop(); 
              SharedPreferences prefs = await SharedPreferences.getInstance();
-                  // await prefs.clear(); // Clear all user data from local storage
-//  prefs.setString('user_data', json.encode(responseData));
-await prefs.remove('user_data');
-// await prefs.remove('user_id');
-await prefs.remove('user_email');
-// await prefs.remove('user_first_name');
-// await prefs.remove('user_last_name');
-await prefs.remove('user_role');
+  await prefs.remove('isLoggedIn');
+  await prefs.remove('user_id');
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('User Successfull Logout'),

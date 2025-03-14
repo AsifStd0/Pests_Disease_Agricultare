@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:agricultare_weather_pests/AddData/add_data.dart';
 import 'package:agricultare_weather_pests/Model/enum.dart';
+import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/drawer/drawer_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_provider.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/snap_tips.dart';
@@ -18,7 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../repository/shared_pref.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final UserDataModel? user; // Make it final and required in navigation
+
+  const HomeScreen({super.key, this.user}); // Accept the user model
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -46,8 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Get.updateLocale(const Locale('en', 'US'));
     }
   }
-
-  // final  _drawerKey = GlobalKey();
   List<String> images = [
     // MepaImage.home2,
     MepaImage.home3,
@@ -57,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+  // log('User data: ${widget.user?.email ?? "No user data"}'); // ✅ Verify if user data is passed
+    
     return Scaffold(
         key: scaffoldKey,
         drawer: new MenuWidget(),
@@ -194,10 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: InkWell(
                                             onTap: () {
                                               if (index == 0) {
-                                                context
-                                                    .read<HomeProvider>()
-                                                    .pickedImage(
-                                                        context, 'disease');
+                                                context.read<HomeProvider>()
+                                                    .pickedImage(context, 'disease');
                                               } else {
                                                 Get.to(() => SnapTips());
                                               }

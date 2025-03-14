@@ -181,14 +181,14 @@ class _AddCropsState extends State<AddCrops> {
              
              onPressed: () async {
   try {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    LocalStorageService localStorageService = LocalStorageService(prefs);
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // LocalStorageService localStorageService = LocalStorageService(prefs);
     
     // ! if add one item from lists Assuming data.added is a list of crops
     // List<String> cropNames = data.added.map((crop) => crop.name).toList();
     // await localStorageService.saveCrops(cropNames);
     // ! ***************  if both item is added 
-        await localStorageService.saveCrops(data.added);
+        // await localStorageService.saveCrops(data.added);
 // Get.to(()=> HomeScreen1());
     
     print('Crops saved successfully');

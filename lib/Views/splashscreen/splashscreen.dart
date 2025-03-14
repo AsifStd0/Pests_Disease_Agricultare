@@ -1,6 +1,9 @@
 
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:agricultare_weather_pests/Model/dummy_api_model.dart';
+import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
@@ -19,7 +22,9 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-   bool isLoading = true;
+  
+  bool isLoading = true;
+  UserDataModel? user; // Define the user model
 
   @override
   void initState() {
@@ -31,32 +36,32 @@ class _SplashscreenState extends State<Splashscreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? languageCode = prefs.getString('language');
 
-    // Set language immediately before UI builds
+    // Set language before UI builds
     if (languageCode != null) {
       Get.updateLocale(Locale(languageCode, languageCode == 'ur' ? 'PK' : 'US'));
     } else {
       Get.updateLocale(const Locale('en', 'US')); // Default to English
     }
-    checkUserExists();
+
+    await checkUserExists();
   }
+
 
   Future<void> checkUserExists() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('user_id');
-    
-log('userId $userId');
-    await Future.delayed(const Duration(milliseconds: 1500));
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
-    if (userId != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+    if (isLoggedIn) {
+      String? userDataString = prefs.getString('user_data');
+      if (userDataString != null) {
+        Map<String, dynamic> userDataMap = json.decode(userDataString);
+        setState(() {
+          user = UserDataModel.fromJson(userDataMap);
+        });
+      }
+      Get.offAll(() => HomeScreen(user: user));  // Pass user data
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Loginscreen()),
-      );
+      Get.offAll(() => Loginscreen()); // Navigate to Login if not logged in
     }
   }
 

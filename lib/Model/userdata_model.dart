@@ -1,96 +1,36 @@
 class UserDataModel {
-  int? id;
-  String? username;
-  String? email;
-  String? password;
+  final int? id;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
 
   UserDataModel({
-    this.id,
-    this.username,
-    this.email,
-    this.password,
+     this.id,
+     this.firstName,
+     this.lastName,
+     this.email,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'username': username,
+      'first_name': firstName,
+      'last_name': lastName,
       'email': email,
-      'password': password,
     };
   }
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) {
     return UserDataModel(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()),
-      username: json['username'],
-      email: json['email'],
-      password: json['password'],
+      id: json['id'],
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      email: json['email'] ?? '',
     );
   }
 
   @override
   String toString() {
-    return '''
-    UserDataModel {
-      id: $id,
-      username: $username,
-      email: $email,
-      password: $password,
-    }
-    ''';
+    return 'UserDataModel(id: $id, firstName: $firstName, lastName: $lastName, email: $email)';
   }
 }
-
-// // lib/models/user_registration_model.dart
-
-// class UserDataModel {
-//    String? id;
-//   String? email;
-//   String? password;
-//   String? firstName;
-//   String? lastName;
-//   UserDataModel({
-//     this.id,
-//      this.email,
-//      this.password,
-//      this.firstName,
-//      this.lastName,
-//   });
-
-//   // Convert a UserRegistration object into a Map
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'id': id,
-//       'email': email,
-//       'password': password,
-//       'firstName': firstName,
-//       'lastName': lastName,
-//     };
-//   }
-
-//   // Create a UserRegistration object from a Map
-//   factory UserDataModel.fromJson(Map<String, dynamic> json) {
-//     return UserDataModel(
-//       id: json['id'],
-//       email: json['email'],
-//       password: json['password'],
-//       firstName: json['firstName'],
-//       lastName: json['lastName'],
-
-//     );
-//   }
-//    @override
-//   String toString() {
-//     return '''
-//     UserDataModel {
-//       id: $id,
-//       email: $email,
-//       password: $password,
-//       firstName: $firstName,
-//       lastName: $lastName,
-//     }
-//     ''';
-//   }
-// }
-// UserDataModel userdata_model = UserDataModel();

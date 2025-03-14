@@ -1,65 +1,41 @@
 import 'dart:convert';
-
 import 'package:agricultare_weather_pests/Model/userdata_model.dart';
-import 'package:agricultare_weather_pests/utils/string_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// class LocalStorageService {
-//     final SharedPreferences _prefs;
-
-//   LocalStorageService(this._prefs);
-//   Future<void> saveCrops(List<String> listCrops) async {
-
-//     await _prefs.setStringList('listCrops', listCrops);
-//   }
-//   List<String>? getCrops(){
-//     return _prefs.getStringList('listCrops');
-//   }
-
-// }
 
 class LocalStorageService {
   final SharedPreferences _prefs;
 
   LocalStorageService(this._prefs);
 
-  // ! *****
-
-   // Save User Locally
-  Future<void> saveUser(Map<String, dynamic> user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('user', json.encode(user));
+  // Save user data
+  Future<void> saveUser(UserDataModel user) async {
+    await _prefs.setString('user', json.encode(user.toJson()));
   }
 
-  // Get User Locally
-  Future<UserDataModel> getUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String user = prefs.getString('user') ?? '';
-    return UserDataModel.fromJson(json.decode(user));
+  // Retrieve user data
+  Future<UserDataModel?> getUser() async {
+    final userString = _prefs.getString('user');
+    if (userString == null) return null;
+    return UserDataModel.fromJson(json.decode(userString));
   }
 
-  // ! **************
-
-  Future<void> saveCrops(List<SelectCropsData> listCrops) async {
-
-    
-    List<String> serializedCrops = listCrops.map((crop) {
-      return jsonEncode({'name': crop.name, 'image': crop.image});
-    }).toList();
-    
-    await _prefs.setStringList('listCrops', serializedCrops);
+  // Save authentication token
+  Future<void> saveToken(String token) async {
+    await _prefs.setString('user_token', token);
   }
 
-// ! *******
-  // Save the language preference
+  // Load authentication token
+  String? loadToken() {
+    return _prefs.getString('user_token');
+  }
+
+  // Save language preference
   Future<void> saveLanguage(String languageCode) async {
     await _prefs.setString('language', languageCode);
   }
 
-  // Load the saved language preference
+  // Load saved language
   String? loadLanguage() {
     return _prefs.getString('language');
   }
-
 }
-
