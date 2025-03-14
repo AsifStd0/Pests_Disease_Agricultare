@@ -47,23 +47,23 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
 
-  Future<void> checkUserExists() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+Future<void> checkUserExists() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
-    if (isLoggedIn) {
-      String? userDataString = prefs.getString('user_data');
-      if (userDataString != null) {
-        Map<String, dynamic> userDataMap = json.decode(userDataString);
-        setState(() {
-          user = UserDataModel.fromJson(userDataMap);
-        });
-      }
-      Get.offAll(() => HomeScreen(user: user));  // Pass user data
-    } else {
-      Get.offAll(() => Loginscreen()); // Navigate to Login if not logged in
+  if (isLoggedIn) {
+    String? userDataString = prefs.getString('user_data');
+    if (userDataString != null) {
+      Map<String, dynamic> userDataMap = json.decode(userDataString);
+      setState(() {
+        user = UserDataModel.fromJson(userDataMap);
+      });
     }
+    Get.offAll(() => HomeScreen());  // ✅ Pass user data to HomeScreen
+  } else {
+    Get.offAll(() => Loginscreen()); // Navigate to Login if not logged in
   }
+}
 
 
   @override

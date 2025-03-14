@@ -61,15 +61,17 @@ class LoginProvider extends BaseViewModel {
         final token = responseData['token'];
 
         // Map API response to UserDataModel
-        userDataModel = UserDataModel.fromJson(userJson);
+      userDataModel = UserDataModel.fromJson(userJson).copyWith(token: token);
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         await prefs.setString('user_id', userJson['id'].toString());
         await prefs.setString('user_token', token);
-        await prefs.setString('user_data', json.encode(userJson)); // Save user data
+      await prefs.setString('user_data', json.encode(userDataModel!.toJson())); // Save user data
 
         log('User ID: ${userJson['id']}  Token: $token ');
+        log('Saved User Data: 000000000000000 ${json.encode(userDataModel!.toJson())}');
+
 
         LocalStorageService storageService = LocalStorageService(prefs);
         String? currentLanguage = storageService.loadLanguage() ?? 'en';
@@ -109,37 +111,6 @@ class LoginProvider extends BaseViewModel {
     return prefs.getBool('isLoggedIn') ?? false;
   }
 
-  Future<void> logout(BuildContext context) async {
-    setState(ViewState.busy);
-
-    try {
-      final response = await http.post(
-        Uri.parse('https://testproject.famzhost.com/api/logout'),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.clear(); 
-
-        Get.offAll(() => Loginscreen());
-        log('User logged out successfully');
-      } else {
-        log('Logout failed: ${response.body}');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to logout. Please try again.')),
-        );
-      }
-    } catch (e) {
-      log('Error during logout: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred. Please try again later.')),
-      );
-    } finally {
-      setState(ViewState.idle);
-    }
-  }
-
   @override
   void dispose() {
     emailController.dispose();
@@ -147,3 +118,40 @@ class LoginProvider extends BaseViewModel {
     super.dispose();
   }
 }
+
+
+
+
+
+
+
+  // Future<void> logout(BuildContext context) async {
+  //   setState(ViewState.busy);
+
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse('https://testproject.famzhost.com/api/logout'),
+  //       headers: {'Content-Type': 'application/json'},
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       await prefs.clear(); 
+
+  //       Get.offAll(() => Loginscreen());
+  //       log('User logged out successfully');
+  //     } else {
+  //       log('Logout failed: ${response.body}');
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('Failed to logout. Please try again.')),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     log('Error during logout: $e');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('An error occurred. Please try again later.')),
+  //     );
+  //   } finally {
+  //     setState(ViewState.idle);
+  //   }
+  // }

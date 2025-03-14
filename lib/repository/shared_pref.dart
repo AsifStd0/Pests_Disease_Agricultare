@@ -7,27 +7,6 @@ class LocalStorageService {
 
   LocalStorageService(this._prefs);
 
-  // Save user data
-  Future<void> saveUser(UserDataModel user) async {
-    await _prefs.setString('user', json.encode(user.toJson()));
-  }
-
-  // Retrieve user data
-  Future<UserDataModel?> getUser() async {
-    final userString = _prefs.getString('user');
-    if (userString == null) return null;
-    return UserDataModel.fromJson(json.decode(userString));
-  }
-
-  // Save authentication token
-  Future<void> saveToken(String token) async {
-    await _prefs.setString('user_token', token);
-  }
-
-  // Load authentication token
-  String? loadToken() {
-    return _prefs.getString('user_token');
-  }
 
   // Save language preference
   Future<void> saveLanguage(String languageCode) async {
@@ -38,4 +17,22 @@ class LocalStorageService {
   String? loadLanguage() {
     return _prefs.getString('language');
   }
+
+
+  
+// ! ****************************************************************************
+  // Save user data
+  Future<void> saveUser(UserDataModel user) async {
+    await _prefs.setString('user_data', json.encode(user.toJson()));
+  }
+
+  // Load user data
+  UserDataModel? loadUser() {
+    final String? userJson = _prefs.getString('user_data');
+    if (userJson != null) {
+      return UserDataModel.fromJson(json.decode(userJson));
+    }
+    return null;
+  }
 }
+

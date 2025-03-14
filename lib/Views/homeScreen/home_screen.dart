@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:agricultare_weather_pests/AddData/add_data.dart';
@@ -21,9 +22,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../repository/shared_pref.dart';
 
 class HomeScreen extends StatefulWidget {
-  final UserDataModel? user; // Make it final and required in navigation
-
-  const HomeScreen({super.key, this.user}); // Accept the user model
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,11 +29,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   RxBool isUrdu = false.obs; // Reactive state for language toggle.
+  UserDataModel? user; // Define user model
 
   @override
   void initState() {
     super.initState();
     _loadLanguagePreference();
+        loadUserData();
+
+  }
+  Future<void> loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userDataString = prefs.getString('user_data');
+
+    if (userDataString != null) {
+      Map<String, dynamic> userDataMap = json.decode(userDataString);
+      setState(() {
+        user = UserDataModel.fromJson(userDataMap);
+      });
+    }
   }
 
   void _loadLanguagePreference() async {
@@ -60,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-  // log('User data: ${widget.user?.email ?? "No user data"}'); // ✅ Verify if user data is passed
+  log('User data: 1111 ${user!.token ?? "No user data"}'); // ✅ Verify if user data is passed
     
     return Scaffold(
         key: scaffoldKey,
@@ -136,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ]);
               })),
             ]),
+     
         body: Consumer<HomeProvider>(builder: (context, provider, child) {
           return ModalProgressHUD(
               inAsyncCall: provider.state == ViewState.busy,
