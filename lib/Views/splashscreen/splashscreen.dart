@@ -1,8 +1,6 @@
 
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:agricultare_weather_pests/Model/dummy_api_model.dart';
 import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
 import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';

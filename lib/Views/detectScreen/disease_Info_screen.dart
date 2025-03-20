@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:agricultare_weather_pests/Views/detectScreen/display_screen.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/disease_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
+import 'package:agricultare_weather_pests/services/api_services.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/custom_button.dart';
 import 'package:agricultare_weather_pests/style/dialogbox/custom_snackbar.dart';
@@ -26,7 +27,7 @@ class DiseaseInfoScreen extends StatefulWidget {
 
 class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
   String feedback = ""; // Stores user feedback
-
+ApiService apiService = ApiService();
   @override
   Widget build(BuildContext context) {
     log('New Screen');
@@ -145,7 +146,18 @@ class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
     widget.disease.treatment != "No treatment information available." &&
     widget.disease.precautions != "No precautions information available.") 
             KlButton(
-              onPressed: () => Get.offAll(() => HomeScreen()),
+              onPressed: () async{
+   await apiService.saveDiseaseData(
+      context,
+      widget.disease.predictedClass,
+      widget.disease.treatment,
+      widget.disease.precautions,
+      widget.pickedImagePath,
+      "Relevant", // ✅ Including feedback as per your JSON structure
+    );
+              },
+              
+              // => Get.offAll(() => HomeScreen()),
               style: KlButtonStyle.camera,
               label: 'save'.tr,
               buttonColor: mainColor,

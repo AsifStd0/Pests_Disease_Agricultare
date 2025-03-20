@@ -5,21 +5,11 @@ import 'package:agricultare_weather_pests/Model/base_view_model.dart';
 import 'package:agricultare_weather_pests/Model/enum.dart';
 import 'package:agricultare_weather_pests/Model/userdata_model.dart';
 import 'package:agricultare_weather_pests/Views/homeScreen/home_screen.dart';
-import 'package:agricultare_weather_pests/Views/login_screen.dart/login_screen.dart';
 import 'package:agricultare_weather_pests/repository/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-
-
-
-
-
-
-
-
 
 class LoginProvider extends BaseViewModel {
   TextEditingController emailController = TextEditingController();
@@ -32,8 +22,6 @@ class LoginProvider extends BaseViewModel {
 
     final String email = emailController.text.trim();
     final String password = passwordController.text.trim();
-    log('Email: $email, Password: $password');
-
     final Map<String, String> loginData = {'email': email, 'password': password};
 
     try {
@@ -44,11 +32,10 @@ class LoginProvider extends BaseViewModel {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: json.encode(loginData),
+        body: json.encode(loginData)
       );
 
-      log('Response status: ${response.statusCode}');
-      log('Response body: ${response.body}'); 
+      log('Response status: ${response.statusCode}  ------------  Response body: ${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData = json.decode(response.body);
@@ -68,7 +55,6 @@ class LoginProvider extends BaseViewModel {
         await prefs.setString('user_id', userJson['id'].toString());
         await prefs.setString('user_token', token);
       await prefs.setString('user_data', json.encode(userDataModel!.toJson())); // Save user data
-
         log('User ID: ${userJson['id']}  Token: $token ');
         log('Saved User Data: 000000000000000 ${json.encode(userDataModel!.toJson())}');
 
@@ -82,13 +68,13 @@ class LoginProvider extends BaseViewModel {
         emailController.clear();
         passwordController.clear();
 
-        // Navigate to HomeScreen
+        // Navigate to HomeScreen 
         Get.offAll(() => HomeScreen());
 
-        // Show success message
+        // Show success message 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Login Successful')),
-        );
+      );
       } else {
         log('Login Failed. Response: ${response.body}');
         ScaffoldMessenger.of(context).showSnackBar(

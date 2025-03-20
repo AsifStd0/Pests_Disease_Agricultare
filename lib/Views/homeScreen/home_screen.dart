@@ -10,7 +10,6 @@ import 'package:agricultare_weather_pests/Views/homeScreen/snap_tips.dart';
 import 'package:agricultare_weather_pests/style/colors.dart';
 import 'package:agricultare_weather_pests/style/constant/texts.dart';
 import 'package:agricultare_weather_pests/utils/image.dart';
-// import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -221,12 +220,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Card(
                                                 elevation: 5,
                                                 child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    mainAxisAlignment:MainAxisAlignment.center,
+                                                    crossAxisAlignment:CrossAxisAlignment.center,
                                                     children: [
                                                       Image.asset(
                                                         images[index],
@@ -235,9 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                       CustomText(
                                                           text: listText[index])
-                                                    ]))));
-                                  });
-                            })),
+                                                    ]))));});})),
 
               FutureBuilder(
   future: SharedPreferences.getInstance(),
@@ -245,10 +238,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return CircularProgressIndicator(); // Show loader while checking login
     }
-
-    // SharedPreferences prefs = snapshot.data as SharedPreferences;
-    // String? userId = prefs.getString('user_id');
-
     return Padding(
       padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.w),
       child: InkWell(
@@ -266,18 +255,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Image.asset(
                   MepaImage.home3,
                   height: 80.h,
-                  width: 160.w,
-                ),
-                CustomText(text: "uploaddata".tr),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  },
-)
-                      ])));
-        }));
-  }
-}
+                  width: 160.w),
+                CustomText(text: "uploaddata".tr)])))));
+  })])));    }));}}

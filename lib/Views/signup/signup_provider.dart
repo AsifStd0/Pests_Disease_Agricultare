@@ -42,12 +42,12 @@ class SignupProvider extends BaseViewModel {
       // ✅ Now use copyWith to update the token
       userDataModel = UserDataModel.fromJson(userJson).copyWith(token: token);
         // ! ***************
-              SharedPreferences prefs = await SharedPreferences.getInstance();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         await prefs.setString('user_id', userJson['id'].toString());
        await prefs.setString('user_data', json.encode(userDataModel!.toJson())); // ✅ Save full user data
-
         await prefs.setString('user_token', token);
+        
         log('Saved User Data: 00000000000000000000 ${json.encode(userDataModel!.toJson())}');
 
 

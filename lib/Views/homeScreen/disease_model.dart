@@ -2,13 +2,13 @@
 // Disease Model for Type Safety
 class DiseaseModel {
   final String predictedClass;
-  final String confidence;
+  // final String confidence;
   final String precautions;
   final String treatment;
 
   DiseaseModel({
     required this.predictedClass,
-    required this.confidence,
+    // required this.confidence,
     required this.precautions,
     required this.treatment,
   });
@@ -16,7 +16,7 @@ class DiseaseModel {
   factory DiseaseModel.fromJson(Map<String, dynamic> json) {
     return DiseaseModel(
       predictedClass: json['predicted_class'] ?? '',
-      confidence: json['confidence'] ?? '',
+      // confidence: json['confidence'] ?? '',
       precautions: json['precautions'] ?? '',
       treatment: json['treatment'] ?? '',
     );

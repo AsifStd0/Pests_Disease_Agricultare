@@ -1,7 +1,10 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:agricultare_weather_pests/Model/comments_Model.dart';
+import 'package:agricultare_weather_pests/style/dialogbox/custom_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 
 class ApiService {
     
@@ -45,14 +48,70 @@ class ApiService {
     return 'Data from API';
   }
 
-  // ! ************************** =================================
   
-}
 
+  // ! ************************** =================================
+  // ! ************************** =================================
+  // ! ************************** =================================
+  // ! ************************** =================================
+  // ! ************************** =================================
+  // ! ************************** =================================
+  Future<void> saveDiseaseData(
+  BuildContext context,
+  String predictedClass,
+  String treatment,
+  String precautions,
+  String pickedImagePath,
+  String feedback, // ✅ Added feedback parameter
+) async {
+  final url = Uri.parse('https://my-json-server.typicode.com/YourGitHubUsername/YourRepo/diseases');
+
+  // ✅ Construct JSON data correctly
+  final Map<String, dynamic> diseaseData = {
+    "disease": {
+      "predictedClass": predictedClass,
+      "treatment": treatment,
+      "precautions": precautions,
+    },
+    "feedback": feedback, // ✅ Include user feedback
+    "imagePath": pickedImagePath, // ✅ Include image path
+  };
+
+  File imageFile = File(pickedImagePath);
+
+  try {
+    var request = http.MultipartRequest('POST', url);
+
+    // ✅ Attach structured JSON data
+    request.fields['data'] = jsonEncode(diseaseData);
+
+    // ✅ Attach image file if it exists
+    if (await imageFile.exists()) {
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'image',
+          imageFile.path,
+          filename: basename(imageFile.path),
+        ),
+      );
+    }
+
+    // ✅ Send the request
+    var response = await request.send();
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      CustomSnackbar.showCustomSnackBarData(context, "Data saved successfully!");
+    } else {
+      CustomSnackbar.showCustomSnackBarData(context, "Failed to save data!");
+    }
+  } catch (e) {
+    CustomSnackbar.showCustomSnackBarData(context, "Error: $e");
+  }
+}
 
 // ! **************   Register User
 
-
+}
 Future<void> register(String email, String password, String firstName, String lastName) async {
   final url = Uri.parse('http://localhost:5005/v1/auth/register');
 

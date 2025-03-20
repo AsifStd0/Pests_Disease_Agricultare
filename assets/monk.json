@@ -1,0 +1,9 @@
+{
+  "disease": {
+    "predictedClass": "Wheat Rust",
+    "treatment": "Use fungicides such as Propiconazole.",
+    "precautions": "Avoid excessive irrigation and ensure proper air circulation."
+  },
+  "feedback": "Relevant",
+  "imagePath": "path/to/image.jpg"
+}
