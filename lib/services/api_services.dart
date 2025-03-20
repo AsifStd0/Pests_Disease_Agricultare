@@ -64,7 +64,7 @@ class ApiService {
   String pickedImagePath,
   String feedback, // ✅ Added feedback parameter
 ) async {
-  final url = Uri.parse('https://my-json-server.typicode.com/YourGitHubUsername/YourRepo/diseases');
+  final url = Uri.parse('https://my-json-server.typicode.com/AsifStd0/Pests_Disease_Agricultare');
 
   // ✅ Construct JSON data correctly
   final Map<String, dynamic> diseaseData = {
